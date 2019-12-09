@@ -1,7 +1,9 @@
-import { Projectile } from './projectile.js';
+import { ShootBase } from '../ShootBase.js';
+import { PROJECTILE_TYPES } from '../constants.js';
 
-const Shooter = class {
+const Shooter = class extends ShootBase {
     constructor(selector) {
+        super();
         this.el = document.querySelector(selector);
     }
 
@@ -16,13 +18,7 @@ const Shooter = class {
     }
 
     shoot() {
-        const proj = new Projectile(this.getShootPoint());
-    }
-
-    getShootPoint() {
-        const leftCenter = this.el.getBoundingClientRect().left + this.el.getBoundingClientRect().width / 2;
-
-        return { x: leftCenter, y: 0 };
+        super.shoot(PROJECTILE_TYPES.SELF);
     }
 }
 

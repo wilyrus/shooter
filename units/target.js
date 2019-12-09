@@ -1,9 +1,13 @@
-const Target = class {
+import { ShootBase } from '../ShootBase.js';
+import { PROJECTILE_TYPES } from '../constants.js';
+
+const Target = class extends ShootBase  {
     moveSize = 5
     direction = 1
     xPosition = 0
 
     constructor(selector) {
+        super();
         this.el = document.querySelector(selector);
         this.startMoving();
     }
@@ -11,7 +15,8 @@ const Target = class {
     startMoving() {
         setInterval(() => {
             this.direction = parseInt(Math.random() * 10) % 2 === 0 ? this.direction * 1 : this.direction * -1;
-        }, 1000);
+            this.shoot(PROJECTILE_TYPES.ENEMY);
+        }, 800);
 
         setInterval(() => {
             if (this.checkOutOfBoundsExceed(1)) {
@@ -20,7 +25,7 @@ const Target = class {
             } else {
                 this.direction *= -1;
             }
-        }, 2);
+        }, 1);
     }
 
     checkOutOfBoundsExceed() {
@@ -28,10 +33,6 @@ const Target = class {
             return this.moveSize + this.el.getBoundingClientRect().width + this.xPosition < window.innerWidth;
         }
         return this.el.getBoundingClientRect().width + this.xPosition - this.moveSize > 0;
-    }
-
-    kill() {
-        this.el.remove();
     }
 }
 

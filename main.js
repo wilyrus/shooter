@@ -1,5 +1,5 @@
-import { Shooter } from './shooter.js';
-import { Target } from './target.js';
+import { Shooter } from './units/shooter.js';
+import { Target } from './units/target.js';
 
 window.facade = {};
 
