@@ -24,8 +24,8 @@ body {
 }
 
 .projectile {
-    height: 100px;
-    width: 20px;
+    height: 80px;
+    width: 15px;
     background: green;
     position: absolute;
     bottom: 0;

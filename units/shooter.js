@@ -1,7 +1,7 @@
-import { ShootBase } from '../ShootBase.js';
+import { UniteBase } from './UniteBase.js';
 import { PROJECTILE_TYPES } from '../constants.js';
 
-const Shooter = class extends ShootBase {
+const Shooter = class extends UniteBase {
     constructor(selector) {
         super();
         this.el = document.querySelector(selector);

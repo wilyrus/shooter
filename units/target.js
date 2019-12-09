@@ -1,7 +1,7 @@
-import { ShootBase } from '../ShootBase.js';
+import { UniteBase } from './UniteBase.js';
 import { PROJECTILE_TYPES } from '../constants.js';
 
-const Target = class extends ShootBase  {
+const Target = class extends UniteBase {
     moveSize = 5
     direction = 1
     xPosition = 0

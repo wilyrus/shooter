@@ -1,14 +1,15 @@
 import { PROJECTILE_TYPES } from './constants.js';
+import { UniteBase } from './units/UniteBase.js';
 
-const Projectile = class {
+const Projectile = class extends UniteBase {
     selector = 'projectile'
     template =  "<div></div>"
     moveSize = 20
     direction = 1
     intervalId = ''
-    xPosition = 0
 
     constructor(coords, projectileType) {
+        super();
         if (projectileType === PROJECTILE_TYPES.ENEMY) {
             this.direction = -1;
         }
@@ -25,10 +26,10 @@ const Projectile = class {
     startMoving() {
         this.intervalId = setInterval(() => {
             if (this.checkOutOfBoundsExceed()) {
-                this.xPosition = this.xPosition + this.moveSize * this.direction * -1;
-                this.el.style.transform = `translate(0, ${this.xPosition}px)`;
+                this.yPosition = this.yPosition + this.moveSize * this.direction * -1;
+                this.el.style.transform = `translate(0, ${this.yPosition}px)`;
 
-                if (this.checkIntersection()) {
+                if (this.checkIntersection(this.direction === -1 ? facade.shooter : facade.target, this)) {
                     this.killTarget();
                 }
             }
@@ -48,16 +49,6 @@ const Projectile = class {
 
     killTarget() {
         this.direction === -1 ? facade.shooter.kill() : facade.target.kill();
-    }
-
-    checkIntersection() {
-        let target = this.direction === -1 ? facade.shooter : facade.target;
-        const targetLeft = target.el.getBoundingClientRect().left;
-        const targetWidth = target.el.getBoundingClientRect().width;
-        const isYIntercest = target.el.getBoundingClientRect().top + target.el.getBoundingClientRect().height >= this.xPosition;
-        const isXIntercest = targetLeft <= this.el.getBoundingClientRect().left && targetLeft + targetWidth > this.el.getBoundingClientRect().left;
-
-        return isYIntercest && isXIntercest;
     }
 }
 
