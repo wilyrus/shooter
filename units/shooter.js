@@ -12,7 +12,7 @@ const Shooter = class extends UniteBase {
         if (this.checkOutOfBoundsExceed(xPosition, yPosition)) {
             this.xPosition = xPosition;
             this.yPosition = yPosition;
-            debugger;
+
             this.el.style.transform = `translate(${this.xPosition}px, ${this.yPosition}px)`;
         }
     }

@@ -14,12 +14,12 @@ const Target = class extends UniteBase {
     }
 
     startMoving() {
-        setInterval(() => {
+        this.moveInterval = setInterval(() => {
             this.direction = parseInt(Math.random() * 10) % 2 === 0 ? this.direction * 1 : this.direction * -1;
             this.shoot(Projectile, PROJECTILE_TYPES.ENEMY);
         }, 800);
 
-        setInterval(() => {
+        this.shootInterval = setInterval(() => {
             if (this.checkOutOfBoundsExceed(1)) {
                 this.xPosition = this.xPosition + this.moveSize * this.direction;
                 this.el.style.transform = `translate(${this.xPosition}px, 0)`;
@@ -27,6 +27,8 @@ const Target = class extends UniteBase {
                 this.direction *= -1;
             }
         }, 1);
+
+        this.actionsIntervals.push(this.moveInterval, this.shootInterval);
     }
 
     checkOutOfBoundsExceed() {

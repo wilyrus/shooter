@@ -1,6 +1,7 @@
 const UniteBase = class {
     xPosition = 0
     yPosition = 0
+    actionsIntervals = []
 
     shoot(Projectile, projectileType) {
         new Projectile(this.getShootPoint(), projectileType);
@@ -14,6 +15,7 @@ const UniteBase = class {
 
     kill() {
         this.el.remove();
+        this.actionsIntervals.forEach(int => clearInterval(int));
     }
 
     getTop() {
