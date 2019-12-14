@@ -1,10 +1,8 @@
-import { Projectile } from '../projectile.js';
-
 const UniteBase = class {
     xPosition = 0
     yPosition = 0
 
-    shoot(projectileType) {
+    shoot(Projectile, projectileType) {
         new Projectile(this.getShootPoint(), projectileType);
     }
 

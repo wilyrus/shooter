@@ -4,7 +4,7 @@ import { UniteBase } from './units/UniteBase.js';
 const Projectile = class extends UniteBase {
     selector = 'projectile'
     template =  "<div></div>"
-    moveSize = 20
+    moveSize = 2
     direction = 1
     intervalId = ''
 
@@ -33,11 +33,11 @@ const Projectile = class extends UniteBase {
                     this.killTarget();
                 }
             }
-        }, 15);
+        }, 1);
     }
 
     checkOutOfBoundsExceed() {
-        const isExceed = this.el.getBoundingClientRect().height + this.el.getBoundingClientRect().top <= 0;
+        const isExceed = this.getTop() + this.getHeight <= 0 || this.getTop() > window.innerHeight;
 
         if (isExceed) {
             this.el.remove();
@@ -49,6 +49,20 @@ const Projectile = class extends UniteBase {
 
     killTarget() {
         this.direction === -1 ? facade.shooter.kill() : facade.target.kill();
+    }
+
+    checkIntersection(el1, el2) {
+        const targetLeft = el1.getLeft();
+        const targetWidth = el1.getWidth();
+        const el1Bottom = el1.getTop() + el1.getHeight();
+        const el2Bottom = el2.getTop() + el2.getHeight();
+
+        const isYIntercest = el1Bottom <= el2.getTop() && el1.getTop() >= el2Bottom 
+            || el1Bottom >= el2.getTop() && el1.getTop() <= el2Bottom;
+        const isXIntercest = targetLeft >= el2.getLeft() + el2.getWidth() && targetLeft + targetWidth <= el2.getLeft()
+            || targetLeft <= el2.getLeft() + el2.getWidth() && targetLeft + targetWidth >= el2.getLeft();
+
+        return isYIntercest && isXIntercest;
     }
 }
 

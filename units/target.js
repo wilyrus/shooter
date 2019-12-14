@@ -1,5 +1,6 @@
 import { UniteBase } from './UniteBase.js';
 import { PROJECTILE_TYPES } from '../constants.js';
+import { Projectile } from '../projectile.js';
 
 const Target = class extends UniteBase {
     moveSize = 5
@@ -15,7 +16,7 @@ const Target = class extends UniteBase {
     startMoving() {
         setInterval(() => {
             this.direction = parseInt(Math.random() * 10) % 2 === 0 ? this.direction * 1 : this.direction * -1;
-            this.shoot(PROJECTILE_TYPES.ENEMY);
+            this.shoot(Projectile, PROJECTILE_TYPES.ENEMY);
         }, 800);
 
         setInterval(() => {

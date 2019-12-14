@@ -1,5 +1,6 @@
 import { UniteBase } from './UniteBase.js';
 import { PROJECTILE_TYPES } from '../constants.js';
+import { Projectile } from '../projectile.js';
 
 const Shooter = class extends UniteBase {
     constructor(selector) {
@@ -7,9 +8,12 @@ const Shooter = class extends UniteBase {
         this.el = document.querySelector(selector);
     }
 
-    move(newCoords) {
-        if (this.checkOutOfBoundsExceed(newCoords)) {
-            this.el.style.left = newCoords;
+    move(xPosition, yPosition) {
+        if (this.checkOutOfBoundsExceed(xPosition, yPosition)) {
+            this.xPosition = xPosition;
+            this.yPosition = yPosition;
+            debugger;
+            this.el.style.transform = `translate(${this.xPosition}px, ${this.yPosition}px)`;
         }
     }
 
@@ -18,7 +22,7 @@ const Shooter = class extends UniteBase {
     }
 
     shoot() {
-        super.shoot(PROJECTILE_TYPES.SELF);
+        super.shoot(Projectile, PROJECTILE_TYPES.SELF);
     }
 }
 

@@ -14,14 +14,14 @@ const queryElements = () => {
 
 const startTrackingMouse = () => {
     document.addEventListener('mousemove', event => {
-        facade.shooter.move(event.clientX);
+        facade.shooter.move(event.clientX, event.clientY);
     });
     document.addEventListener('pointerdown', () => {
         facade.shooter.shoot();
     });
 }
 
-document.addEventListener('readystatechange', ()=>{
+document.addEventListener('DOMContentLoaded', () => {
     queryElements();
     startTrackingMouse();
 });
