@@ -42,7 +42,7 @@ const Projectile = class extends UniteBase {
     }
 
     checkOutOfBoundsExceed() {
-        const isExceed = this.getTop() + this.getHeight <= 0 || this.getTop() > window.innerHeight;
+        const isExceed = this.getTop() + this.getHeight() <= 0 || this.getTop() > window.innerHeight;
 
         if (isExceed) {
             this.el.remove();
