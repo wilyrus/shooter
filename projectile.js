@@ -10,11 +10,16 @@ const Projectile = class extends UniteBase {
 
     constructor(coords, projectileType) {
         super();
+        let className = '';
         if (projectileType === PROJECTILE_TYPES.ENEMY) {
             this.direction = -1;
+            className = 'enemyProj';
+        } else {
+            className = 'allyProj';
         }
         const newDiv = document.createElement("div");
         newDiv.classList.add(this.selector);
+        newDiv.classList.add(className);
         newDiv.innerHTML = this.template;
         newDiv.style.left = coords.x;
         newDiv.style.top = coords.y;

@@ -21,8 +21,15 @@ html, body {
     height: 80px;
     width: 12px;
     border-radius: 25%;
-    background: green;
     position: absolute;
+}
+
+.projectile.enemyProj {
+    background: red;
+}
+
+.projectile.allyProj {
+    background: blue;
 }
 
 .menu {
