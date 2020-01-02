@@ -7,14 +7,16 @@ html, body {
     height: 30px;
     width: 120px;
     background: red;
-    position: relative;
+    position: absolute;
+    box-shadow: 0 2px 5px rgba(0,0,0,1);
 }
 
 .shooter {
     height: 30px;
     width: 150px;
     background: green;
-    position: relative;
+    position: absolute;
+    box-shadow: 0 2px 5px rgba(0,0,0,1);
 }
 
 .projectile {
@@ -32,6 +34,10 @@ html, body {
     background: blue;
 }
 
-.menu {
-    display: none;
+.powerUp {
+    background-color: bisque;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    position: absolute;
 }

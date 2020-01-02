@@ -6,6 +6,7 @@ const Target = class extends UniteBase {
     moveSize = 5
     direction = 1
     xPosition = 0
+    id = 'target'
 
     constructor(selector) {
         super();

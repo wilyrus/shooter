@@ -16,6 +16,7 @@ const UniteBase = class {
     kill() {
         this.el.remove();
         this.actionsIntervals.forEach(int => clearInterval(int));
+        facade[this.id] = null;
     }
 
     getTop() {
@@ -35,6 +36,10 @@ const UniteBase = class {
     }
 
     checkIntersection(el1, el2) {
+        if (!el1 || !el2) {
+            return;
+        }
+        
         const targetLeft = el1.getLeft();
         const targetWidth = el1.getWidth();
 
@@ -42,6 +47,10 @@ const UniteBase = class {
         const isXIntercest = targetLeft <= el2.getLeft() && targetLeft + targetWidth > el2.getLeft();
 
         return isYIntercest && isXIntercest;
+    }
+
+    updatePosition() {
+
     }
 }
 
