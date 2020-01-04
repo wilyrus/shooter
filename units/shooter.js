@@ -48,8 +48,8 @@ const Shooter = class extends UniteBase {
     kill() {
         super.kill();
 
-        document.addEventListener('mousemove', this.move);
-        document.addEventListener('pointerdown', this.shoot);
+        document.removeEventListener('mousemove', this.move);
+        document.removeEventListener('pointerdown', this.shoot);
     }
 }
 
