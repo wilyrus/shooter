@@ -1,6 +1,5 @@
 import { UniteBase } from './UniteBase.js';
 import { PROJECTILE_TYPES } from '../constants.js';
-import { Projectile } from '../projectile.js';
 
 const Shooter = class extends UniteBase {
     id = 'shooter'
@@ -28,7 +27,17 @@ const Shooter = class extends UniteBase {
     }
 
     shoot() {
-        super.shoot(Projectile, PROJECTILE_TYPES.SELF);
+        this.auotshoot = !this.auotshoot;
+        if (this.auotshoot) {
+            this.toggleAutoShoot();
+        } else {
+            clearInterval(this.auotshootInterval)
+        }
+    }
+
+    toggleAutoShoot() {
+        this.auotshootInterval = setInterval(() =>
+         super.shoot(PROJECTILE_TYPES.SELF, { moveSize: 5, moveDelay: 2 }), 1000);
     }
 
     startTrackingMouse = () => {

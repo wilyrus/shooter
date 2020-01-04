@@ -8,8 +8,10 @@ const Projectile = class extends UniteBase {
     direction = 1
     intervalId = ''
 
-    constructor(coords, projectileType) {
+    constructor(coords, projectileType, config = {}) {
         super();
+        this.moveSize = config.moveSize || 2;
+        this.moveDelay = config.moveDelay || 1;
         let className = '';
         if (projectileType === PROJECTILE_TYPES.ENEMY) {
             this.direction = -1;
@@ -38,7 +40,7 @@ const Projectile = class extends UniteBase {
                     this.killTarget();
                 }
             }
-        }, 1);
+        }, this.moveDelay);
     }
 
     checkOutOfBoundsExceed() {
@@ -54,20 +56,6 @@ const Projectile = class extends UniteBase {
 
     killTarget() {
         this.direction === -1 ? facade.shooter.kill() : facade.target.kill();
-    }
-
-    checkIntersection(el1, el2) {
-        const targetLeft = el1.getLeft();
-        const targetWidth = el1.getWidth();
-        const el1Bottom = el1.getTop() + el1.getHeight();
-        const el2Bottom = el2.getTop() + el2.getHeight();
-
-        const isYIntercest = el1Bottom <= el2.getTop() && el1.getTop() >= el2Bottom 
-            || el1Bottom >= el2.getTop() && el1.getTop() <= el2Bottom;
-        const isXIntercest = targetLeft >= el2.getLeft() + el2.getWidth() && targetLeft + targetWidth <= el2.getLeft()
-            || targetLeft <= el2.getLeft() + el2.getWidth() && targetLeft + targetWidth >= el2.getLeft();
-
-        return isYIntercest && isXIntercest;
     }
 }
 

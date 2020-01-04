@@ -20,8 +20,8 @@ html, body {
 }
 
 .projectile {
-    height: 80px;
-    width: 12px;
+    height: 40px;
+    width: 10px;
     border-radius: 25%;
     position: absolute;
 }

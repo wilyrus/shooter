@@ -3,8 +3,17 @@ const UniteBase = class {
     yPosition = 0
     actionsIntervals = []
 
-    shoot(Projectile, projectileType) {
-        new Projectile(this.getShootPoint(), projectileType);
+    constructor() {
+        this.init();
+    }
+
+    async init() {
+        const module = await import('./WeaponsFactory.js');
+        this.WeaponsFactory = module.WeaponsFactory;
+    }
+
+    shoot(projectileType, config) {
+        this.WeaponsFactory.shootDouble(this.getShootPoint(), projectileType, config);
     }
 
     getShootPoint() {
@@ -42,9 +51,13 @@ const UniteBase = class {
         
         const targetLeft = el1.getLeft();
         const targetWidth = el1.getWidth();
+        const el1Bottom = el1.getTop() + el1.getHeight();
+        const el2Bottom = el2.getTop() + el2.getHeight();
 
-        const isYIntercest = el1.getTop() - el1.getHeight() <= el2.getTop() && el2.getTop() + el2.getHeight() <= el1.getTop();
-        const isXIntercest = targetLeft <= el2.getLeft() && targetLeft + targetWidth > el2.getLeft();
+        const isYIntercest = el1Bottom <= el2.getTop() && el1.getTop() >= el2Bottom 
+            || el1Bottom >= el2.getTop() && el1.getTop() <= el2Bottom;
+        const isXIntercest = targetLeft >= el2.getLeft() + el2.getWidth() && targetLeft + targetWidth <= el2.getLeft()
+            || targetLeft <= el2.getLeft() + el2.getWidth() && targetLeft + targetWidth >= el2.getLeft();
 
         return isYIntercest && isXIntercest;
     }
