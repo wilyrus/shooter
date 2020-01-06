@@ -3,6 +3,8 @@ import { PROJECTILE_TYPES } from '../constants.js';
 
 const Shooter = class extends UniteBase {
     id = 'shooter'
+    gunLevel = 1
+    auotshoot = false
 
     constructor(selector) {
         super();
@@ -37,7 +39,7 @@ const Shooter = class extends UniteBase {
 
     toggleAutoShoot() {
         this.auotshootInterval = setInterval(() =>
-         super.shoot(PROJECTILE_TYPES.SELF, { moveSize: 5, moveDelay: 2 }), 1000);
+         super.shoot(PROJECTILE_TYPES.SELF, { moveSize: 5, moveDelay: 2, gunLevel: this.gunLevel }), 1000 - this.gunLevel * 50 > 300 ? 1000 - this.gunLevel * 50  : 300);
     }
 
     startTrackingMouse = () => {
@@ -50,6 +52,12 @@ const Shooter = class extends UniteBase {
 
         document.removeEventListener('mousemove', this.move);
         document.removeEventListener('pointerdown', this.shoot);
+    }
+
+    upgrade() {
+        this.gunLevel++;
+        this.shoot();
+        this.shoot();
     }
 }
 

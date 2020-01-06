@@ -7,7 +7,7 @@ window.facade = {};
 
 const queryElements = () => {
     facade.shooter = new Shooter('.shooter');
-    facade.target = new Target('.target');
+    facade.target = new Target();
     facade.powerupsFactory = new PowerupsFactory();
 
     if (facade.shooter && facade.target) {

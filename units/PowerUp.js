@@ -22,22 +22,13 @@ const PowerUp = class extends UniteBase {
                 this.yPosition = this.yPosition + this.moveSize;
                 this.el.style.transform = `translate(0, ${this.yPosition}px)`;
 
-                if (this.checkIntersection(this.direction === -1 ? facade.shooter : facade.target, this)) {
-                    //this.killTarget();
+                if (this.checkIntersection(facade.shooter, this)) {
+                    this.kill();
+                    facade.shooter.upgrade(this);
                 }
             }
         }, 10);
-    }
-
-    checkOutOfBoundsExceed() {
-        const isExceed = this.getTop() + this.getHeight() <= 0 || this.getTop() > window.innerHeight;
-
-        if (isExceed) {
-            this.el.remove();
-            clearInterval(this.intervalId);
-            return false;
-        }
-        return true;
+        this.actionsIntervals.push(this.intervalId);
     }
 }
 

@@ -62,8 +62,14 @@ const UniteBase = class {
         return isYIntercest && isXIntercest;
     }
 
-    updatePosition() {
+    checkOutOfBoundsExceed() {
+        const isExceed = this.getTop() + this.getHeight() <= 0 || this.getTop() > window.innerHeight;
 
+        if (isExceed) {
+            this.kill();
+            return false;
+        }
+        return true;
     }
 }
 

@@ -6,10 +6,17 @@ const Target = class extends UniteBase {
     direction = 1
     xPosition = 0
     id = 'target'
+    selector= 'target'
+    template = ''
 
-    constructor(selector) {
+    constructor() {
         super();
-        this.el = document.querySelector(selector);
+        const newDiv = document.createElement("div");
+        newDiv.classList.add(this.selector);
+        newDiv.innerHTML = this.template;
+        document.body.append(newDiv);
+        this.el = newDiv;
+
         this.startMoving();
     }
 

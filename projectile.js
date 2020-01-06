@@ -43,17 +43,6 @@ const Projectile = class extends UniteBase {
         }, this.moveDelay);
     }
 
-    checkOutOfBoundsExceed() {
-        const isExceed = this.getTop() + this.getHeight() <= 0 || this.getTop() > window.innerHeight;
-
-        if (isExceed) {
-            this.el.remove();
-            clearInterval(this.intervalId);
-            return false;
-        }
-        return true;
-    }
-
     killTarget() {
         this.direction === -1 ? facade.shooter.kill() : facade.target.kill();
     }
