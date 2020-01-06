@@ -1,4 +1,5 @@
 import { UniteBase } from './UniteBase.js';
+import { Gun } from './Gun.js';
 import { PROJECTILE_TYPES } from '../constants.js';
 
 const Shooter = class extends UniteBase {
@@ -7,6 +8,7 @@ const Shooter = class extends UniteBase {
     auotshoot = false
     selector = 'shooter'
     template = `<div class="cannon"></div><div class="body"></div>`
+    projectileType = PROJECTILE_TYPES.SELF
 
     constructor() {
         super();
@@ -16,6 +18,7 @@ const Shooter = class extends UniteBase {
         newDiv.innerHTML = this.template;
         document.body.append(newDiv);
         this.el = newDiv;
+        this.gun = new Gun(this.projectileType);
 
         this.startTrackingMouse();
     }
@@ -39,15 +42,10 @@ const Shooter = class extends UniteBase {
     shoot() {
         this.auotshoot = !this.auotshoot;
         if (this.auotshoot) {
-            this.toggleAutoShoot();
+            this.gun.startShoot(this);
         } else {
-            clearInterval(this.auotshootInterval)
+            this.gun.stopShoot();
         }
-    }
-
-    toggleAutoShoot() {
-        this.auotshootInterval = setInterval(() =>
-         super.shoot(PROJECTILE_TYPES.SELF, { moveSize: 5, moveDelay: 2, gunLevel: this.gunLevel }), 1000 - this.gunLevel * 50 > 300 ? 1000 - this.gunLevel * 50  : 300);
     }
 
     startTrackingMouse = () => {
@@ -62,10 +60,8 @@ const Shooter = class extends UniteBase {
         document.removeEventListener('pointerdown', this.shoot);
     }
 
-    upgrade() {
-        this.gunLevel++;
-        this.shoot();
-        this.shoot();
+    upgrade(powerUp) {
+        this.gun.upgrade(powerUp.type);
     }
 }
 

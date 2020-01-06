@@ -3,19 +3,6 @@ const UniteBase = class {
     yPosition = 0
     actionsIntervals = []
 
-    constructor() {
-        this.init();
-    }
-
-    async init() {
-        const module = await import('./WeaponsFactory.js');
-        this.WeaponsFactory = module.WeaponsFactory;
-    }
-
-    shoot(projectileType, config) {
-        this.WeaponsFactory.shootDouble(this.getShootPoint(), projectileType, config);
-    }
-
     getShootPoint() {
         const leftCenter = this.getLeft() + this.getWidth() / 2;
 
