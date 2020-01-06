@@ -6,7 +6,7 @@ import { PowerupsFactory } from './units/PowerupsFactory.js';
 window.facade = {};
 
 const queryElements = () => {
-    facade.shooter = new Shooter('.shooter');
+    facade.shooter = new Shooter();
     facade.target = new Target();
     facade.powerupsFactory = new PowerupsFactory();
 

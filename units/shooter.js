@@ -5,10 +5,18 @@ const Shooter = class extends UniteBase {
     id = 'shooter'
     gunLevel = 1
     auotshoot = false
+    selector = 'shooter'
+    template = `<div class="cannon"></div><div class="body"></div>`
 
-    constructor(selector) {
+    constructor() {
         super();
-        this.el = document.querySelector(selector);
+
+        const newDiv = document.createElement("div");
+        newDiv.classList.add(this.selector);
+        newDiv.innerHTML = this.template;
+        document.body.append(newDiv);
+        this.el = newDiv;
+
         this.startTrackingMouse();
     }
 
