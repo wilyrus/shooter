@@ -1,6 +1,6 @@
-import { UniteBase } from './UniteBase.js';
-import { Gun } from './Gun.js';
-import { PROJECTILE_TYPES } from '../constants.js';
+import { UniteBase } from './UniteBase';
+import { Gun } from './Gun';
+import { ProjectileTypes } from './types';
 
 const Shooter = class extends UniteBase {
     id = 'shooter'
@@ -8,7 +8,8 @@ const Shooter = class extends UniteBase {
     auotshoot = false
     selector = 'shooter'
     template = `<div class="cannon"></div><div class="body"></div>`
-    projectileType = PROJECTILE_TYPES.SELF
+    projectileType = ProjectileTypes.Self
+    gun: any //todo fix
 
     constructor() {
         super();
@@ -23,7 +24,7 @@ const Shooter = class extends UniteBase {
         this.startTrackingMouse();
     }
 
-    move(event) {
+    move(event: PointerEvent) {
         const xPosition = event.clientX;
         const yPosition = event.clientY;
 
@@ -33,10 +34,6 @@ const Shooter = class extends UniteBase {
 
             this.el.style.transform = `translate(${this.xPosition}px, ${this.yPosition}px)`;
         }
-    }
-
-    checkOutOfBoundsExceed(newCoords) {
-        return newCoords + this.el.getBoundingClientRect().width < window.innerWidth;
     }
 
     shoot() {
@@ -60,7 +57,7 @@ const Shooter = class extends UniteBase {
         document.removeEventListener('pointerdown', this.shoot);
     }
 
-    upgrade(powerUp) {
+    upgrade(powerUp: any) { //todo fix
         this.gun.upgrade(powerUp.type);
     }
 }

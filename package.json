@@ -1,0 +1,27 @@
+{
+  "name": "shooter",
+  "version": "0.0.1",
+  "description": "scroll shooter game",
+  "main": "main.js",
+  "dependencies": {},
+  "devDependencies": {
+    "source-map-loader": "^0.2.4",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.4",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wilerus/shooter.git"
+  },
+  "author": "wilyrus",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wilerus/shooter/issues"
+  },
+  "homepage": "https://github.com/wilerus/shooter#readme"
+}

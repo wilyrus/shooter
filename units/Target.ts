@@ -1,6 +1,6 @@
-import { UniteBase } from './UniteBase.js';
-import { PROJECTILE_TYPES } from '../constants.js';
-import { Gun } from './Gun.js';
+import { UniteBase } from './UniteBase';
+import { ProjectileTypes } from './types';
+import { Gun } from './Gun';
 
 const Target = class extends UniteBase {
     moveSize = 5
@@ -9,7 +9,8 @@ const Target = class extends UniteBase {
     id = 'target'
     selector= 'target'
     template = ''
-    projectileType = PROJECTILE_TYPES.ENEMY
+    projectileType = ProjectileTypes.Enemy
+    gun: any //todo fix
 
     constructor() {
         super();
@@ -25,12 +26,12 @@ const Target = class extends UniteBase {
     }
 
     startMoving() {
-        this.moveInterval = setInterval(() => {
-            this.direction = parseInt(Math.random() * 10) % 2 === 0 ? this.direction * 1 : this.direction * -1;
+        const moveInterval = setInterval(() => {
+            this.direction = Math.floor(Math.random() * 10) % 2 === 0 ? this.direction * 1 : this.direction * -1;
         }, 800);
 
-        this.shootInterval = setInterval(() => {
-            if (this.checkOutOfBoundsExceed(1)) {
+        const shootInterval = setInterval(() => {
+            if (this.checkOutOfBoundsExceed()) {
                 this.xPosition = this.xPosition + this.moveSize * this.direction;
                 this.el.style.transform = `translate(${this.xPosition}px, 0)`;
             } else {
@@ -38,7 +39,7 @@ const Target = class extends UniteBase {
             }
         }, 1);
 
-        this.actionsIntervals.push(this.moveInterval, this.shootInterval);
+        this.actionsIntervals.push(moveInterval, shootInterval);
     }
 
     checkOutOfBoundsExceed() {

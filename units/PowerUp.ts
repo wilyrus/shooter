@@ -1,37 +1,38 @@
-import { UniteBase } from './UniteBase.js';
+import { UniteBase } from './UniteBase';
+import { PowerUpTypes } from './types';
 
 const PowerUp = class extends UniteBase {
     moveSize = 2
     direction = 1
     xPosition = 0
     id = 'target'
+    type: PowerUpTypes
 
-    constructor(xPos) {
+    constructor(xPos: number) {
         super();
         this.el = document.createElement('div');
         this.type = this.getRandomType();
         this.el.classList.add('powerUp');
         this.el.classList.add(this.type);
         this.el.innerHTML = this.getInnerHTML(this.type);
-        this.el.style.left = xPos;
+        this.el.style.left = `${xPos}px`;
 
         document.querySelector('body').appendChild(this.el);
         this.startMoving();
     }
 
     startMoving() {
-        this.intervalId = setInterval(() => {
+        this.actionsIntervals.push( setInterval(() => {
             if (this.checkOutOfBoundsExceed()) {
                 this.yPosition = this.yPosition + this.moveSize;
                 this.el.style.transform = `translate(0, ${this.yPosition}px)`;
 
-                if (this.checkIntersection(facade.shooter, this)) {
+                if (this.checkIntersection(window.facade.shooter, this)) {
                     this.kill();
-                    facade.shooter.upgrade(this);
+                    window.facade.shooter.upgrade(this);
                 }
             }
-        }, 10);
-        this.actionsIntervals.push(this.intervalId);
+        }, 10));
     }
 
     getRandomType() {
@@ -42,26 +43,26 @@ const PowerUp = class extends UniteBase {
 
         switch (randomTypeIndex) {
             case 0: {
-                return 'flySpeed';
+                return PowerUpTypes.FlySpeed;
             }
             case 1: {
-                return 'power';
+                return PowerUpTypes.Power;
             }
             case 2: {
-                return 'shootSpeed';
+                return PowerUpTypes.ShootSpeed;
             }
         }
     }
 
-    getInnerHTML(type) {
+    getInnerHTML(type: PowerUpTypes) {
         switch (type) {
-            case 'flySpeed': {
+            case PowerUpTypes.FlySpeed: {
                 return 'FS';
             }
-            case 'power': {
+            case PowerUpTypes.Power: {
                 return 'PW';
             }
-            case 'shootSpeed': {
+            case PowerUpTypes.ShootSpeed: {
                 return 'SS';
             }
         }

@@ -1,7 +1,9 @@
 const UniteBase = class {
     xPosition = 0
     yPosition = 0
-    actionsIntervals = []
+    actionsIntervals: number[] = []
+    id = ''
+    el: HTMLElement
 
     getShootPoint() {
         const leftCenter = this.getLeft() + this.getWidth() / 2;
@@ -12,14 +14,15 @@ const UniteBase = class {
     kill() {
         this.el.remove();
         this.actionsIntervals.forEach(int => clearInterval(int));
-        facade[this.id] = null;
+
+        window.facade[this.id] = null;
     }
 
     getTop() {
         return this.el.getBoundingClientRect().top;
     }
 
-    getLeft() {
+    getLeft(): number {
         return this.el.getBoundingClientRect().left;
     }
 
@@ -31,7 +34,7 @@ const UniteBase = class {
         return this.el.getBoundingClientRect().height;
     }
 
-    checkIntersection(el1, el2) {
+    checkIntersection(el1: any, el2: any) { //todo wtf
         if (!el1 || !el2) {
             return;
         }
@@ -49,7 +52,7 @@ const UniteBase = class {
         return isYIntercest && isXIntercest;
     }
 
-    checkOutOfBoundsExceed() {
+    checkOutOfBoundsExceed(xPosition?: number, yPosition?: number) {
         const isExceed = this.getTop() + this.getHeight() <= 0 || this.getTop() > window.innerHeight;
 
         if (isExceed) {

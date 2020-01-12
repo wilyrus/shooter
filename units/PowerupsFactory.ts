@@ -1,7 +1,9 @@
 
-import { PowerUp } from './PowerUp.js';
+import { PowerUp } from './PowerUp';
 
 const PowerupsFactory = class {
+    intervalId: number;
+
     constructor() {
         this.startSpawning();
     }
