@@ -1,13 +1,14 @@
 import { Shooter } from './units/Shooter';
 import { Target } from './units/Target';
 import { Menu } from './menu';
-import { PowerupsFactory } from './units/PowerupsFactory';
+import { PowerupsFactory } from './factories/PowerupsFactory';
+import { PhysicsEngine } from './engines/PhysicsEngine';
 
 declare global {
     interface Window { 
         facade: any;
         shooter: any;
-        target: any;
+        phisicsEngine: any;
         powerupsFactory: any;
         menu: any;
     }
@@ -16,8 +17,9 @@ declare global {
 window.facade = {};
 
 const queryElements = () => {
-    window.facade.shooter = new Shooter();
-    window.facade.target = new Target();
+    new PhysicsEngine();
+    PhysicsEngine.actors.push(new Target(), new Target(), new Shooter());
+    window.facade.physicsEngine = PhysicsEngine;
     window.facade.powerupsFactory = new PowerupsFactory();
     window.facade.menu = new Menu();
 

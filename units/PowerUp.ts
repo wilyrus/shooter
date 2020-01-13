@@ -27,10 +27,7 @@ const PowerUp = class extends UniteBase {
                 this.yPosition = this.yPosition + this.moveSize;
                 this.el.style.transform = `translate(0, ${this.yPosition}px)`;
 
-                if (this.checkIntersection(window.facade.shooter, this)) {
-                    this.kill();
-                    window.facade.shooter.upgrade(this);
-                }
+                this.eventEmitter.emit('move', this);
             }
         }, 10));
     }
@@ -66,6 +63,10 @@ const PowerUp = class extends UniteBase {
                 return 'SS';
             }
         }
+    }
+
+    intersectedBy() {
+        this.kill();
     }
 }
 

@@ -8,7 +8,7 @@ const Shooter = class extends UniteBase {
     auotshoot = false
     selector = 'shooter'
     template = `<div class="cannon"></div><div class="body"></div>`
-    projectileType = ProjectileTypes.Self
+    type = ProjectileTypes.Self
     gun: any //todo fix
 
     constructor() {
@@ -19,7 +19,7 @@ const Shooter = class extends UniteBase {
         newDiv.innerHTML = this.template;
         document.body.append(newDiv);
         this.el = newDiv;
-        this.gun = new Gun(this.projectileType);
+        this.gun = new Gun(this.type);
 
         this.startTrackingMouse();
     }
@@ -33,6 +33,7 @@ const Shooter = class extends UniteBase {
             this.yPosition = yPosition;
 
             this.el.style.transform = `translate(${this.xPosition}px, ${this.yPosition}px)`;
+            this.eventEmitter.emit('move', this);
         }
     }
 
@@ -55,6 +56,13 @@ const Shooter = class extends UniteBase {
 
         document.removeEventListener('mousemove', this.move);
         document.removeEventListener('pointerdown', this.shoot);
+    }
+
+    intersectedBy(target: any) {
+        switch (target.type) {
+            case 'PowerUp': this.upgrade(target);
+            case 'EnemyProjectail': this.kill;
+        }
     }
 
     upgrade(powerUp: any) { //todo fix

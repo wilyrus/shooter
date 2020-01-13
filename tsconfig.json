@@ -4,7 +4,6 @@
         "sourceMap": true,
         "noImplicitAny": true,
         "module": "commonjs",
-        "target": "ES2019",
-        "jsx": "react"
+        "target": "ES2019"
     }
 }

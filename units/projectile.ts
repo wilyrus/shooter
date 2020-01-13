@@ -8,12 +8,14 @@ const Projectile = class extends UniteBase {
     direction = 1
     intervalId = ''
     moveDelay = 1
+    type: ProjectileTypes
 
     constructor(coords: PlanePoint, projectileType: ProjectileTypes, config: MotionConfig) {
         super();
         this.moveSize = config.moveSize || 2;
         this.moveDelay = config.moveDelay || 1;
         let className = '';
+        this.type = projectileType;
 
         if (projectileType === ProjectileTypes.Enemy) {
             this.direction = -1;
@@ -21,6 +23,7 @@ const Projectile = class extends UniteBase {
         } else {
             className = 'allyProj';
         }
+
         const newDiv = document.createElement("div");
         newDiv.classList.add(this.selector);
         newDiv.classList.add(className);
@@ -38,17 +41,17 @@ const Projectile = class extends UniteBase {
                 this.yPosition = this.yPosition + this.moveSize * this.direction * -1;
                 this.el.style.transform = `translate(0, ${this.yPosition}px)`;
 
-                if (this.checkIntersection(this.direction === -1 ? window.facade.shooter : window.facade.target, this)) {
-                    this.killTarget();
-                }
+                this.eventEmitter.emit('move', this);
             }
         }, this.moveDelay);
 
         this.actionsIntervals.push(intervalId);
     }
 
-    killTarget() {
-        this.direction === -1 ? window.facade.shooter.kill() : window.facade.target.kill();
+    intersectedBy(target: any) {
+        if (this.type !== target.type) {
+            target.kill();
+        }
     }
 }
 

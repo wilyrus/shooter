@@ -1,4 +1,4 @@
-import { WeaponsFactory } from './WeaponsFactory';
+import { WeaponsFactory } from '../factories/WeaponsFactory';
 import { PowerUpTypes, ProjectileTypes, MotionConfig } from './types';
 
 const Gun = class {
@@ -7,7 +7,7 @@ const Gun = class {
     projectailSpeed = 1
     power = 1
     projectileType: ProjectileTypes
-    autoShootInterval: number
+    autoShootInterval: NodeJS.Timeout
 
     constructor(projectileType: ProjectileTypes) {
         this.projectileType = projectileType;

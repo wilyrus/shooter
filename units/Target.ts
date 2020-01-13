@@ -9,7 +9,7 @@ const Target = class extends UniteBase {
     id = 'target'
     selector= 'target'
     template = ''
-    projectileType = ProjectileTypes.Enemy
+    type = ProjectileTypes.Enemy
     gun: any //todo fix
 
     constructor() {
@@ -19,7 +19,7 @@ const Target = class extends UniteBase {
         newDiv.innerHTML = this.template;
         document.body.append(newDiv);
         this.el = newDiv;
-        this.gun = new Gun(this.projectileType);
+        this.gun = new Gun(this.type);
 
         this.startMoving();
         this.gun.startShoot(this);
@@ -34,12 +34,19 @@ const Target = class extends UniteBase {
             if (this.checkOutOfBoundsExceed()) {
                 this.xPosition = this.xPosition + this.moveSize * this.direction;
                 this.el.style.transform = `translate(${this.xPosition}px, 0)`;
+                this.eventEmitter.emit('move', this);
             } else {
                 this.direction *= -1;
             }
         }, 1);
 
         this.actionsIntervals.push(moveInterval, shootInterval);
+    }
+
+    intersectedBy(target: any) {
+        switch (target.type) {
+            case 'SelfProjectail': this.kill;
+        }
     }
 
     checkOutOfBoundsExceed() {

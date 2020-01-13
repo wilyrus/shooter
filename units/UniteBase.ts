@@ -1,9 +1,16 @@
+import { EventEmitter } from '../services/EventEmiter';
+
 const UniteBase = class {
     xPosition = 0
     yPosition = 0
-    actionsIntervals: number[] = []
+    actionsIntervals: NodeJS.Timeout[] = []
     id = ''
     el: HTMLElement
+    eventEmitter: any
+
+    constructor() {
+        this.eventEmitter = new EventEmitter();
+    }
 
     getShootPoint() {
         const leftCenter = this.getLeft() + this.getWidth() / 2;
@@ -15,7 +22,7 @@ const UniteBase = class {
         this.el.remove();
         this.actionsIntervals.forEach(int => clearInterval(int));
 
-        window.facade[this.id] = null;
+        window.facade[this.id] = null; //todo remove from actors
     }
 
     getTop() {
@@ -32,24 +39,6 @@ const UniteBase = class {
 
     getHeight() {
         return this.el.getBoundingClientRect().height;
-    }
-
-    checkIntersection(el1: any, el2: any) { //todo wtf
-        if (!el1 || !el2) {
-            return;
-        }
-        
-        const targetLeft = el1.getLeft();
-        const targetWidth = el1.getWidth();
-        const el1Bottom = el1.getTop() + el1.getHeight();
-        const el2Bottom = el2.getTop() + el2.getHeight();
-
-        const isYIntercest = el1Bottom <= el2.getTop() && el1.getTop() >= el2Bottom 
-            || el1Bottom >= el2.getTop() && el1.getTop() <= el2Bottom;
-        const isXIntercest = targetLeft >= el2.getLeft() + el2.getWidth() && targetLeft + targetWidth <= el2.getLeft()
-            || targetLeft <= el2.getLeft() + el2.getWidth() && targetLeft + targetWidth >= el2.getLeft();
-
-        return isYIntercest && isXIntercest;
     }
 
     checkOutOfBoundsExceed(xPosition?: number, yPosition?: number) {
