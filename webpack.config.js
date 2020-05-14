@@ -9,7 +9,7 @@ module.exports = {
     devtool: "source-map",
 
     resolve: {
-        extensions: ['.wasm', '.mjs', '.js', '.json', '.vue', '.jsx', '.ts', '.tsx']
+        extensions: ['.wasm', '.mjs', '.js', '.json', '.vue', '.jsx', '.ts', '.tsx', '.css']
     },
 
     module: {

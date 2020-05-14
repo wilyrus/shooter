@@ -9,4 +9,4 @@ declare global {
     }
 }
 
-createApp(App).mount('#app')
+createApp(App).mount('#vueScene')
