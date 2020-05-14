@@ -1,13 +1,13 @@
+const { VueLoaderPlugin } = require('vue-loader')
+
 module.exports = {
     mode: "development",
 
     entry: './main.ts',
 
-    // Enable sourcemaps for debugging webpack's output.
     devtool: "source-map",
 
     resolve: {
-        // Add '.ts' and '.tsx' as resolvable extensions.
         extensions: [".ts", '.js']
     },
 
@@ -22,12 +22,25 @@ module.exports = {
                     }
                 ]
             },
-            // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
             {
                 enforce: "pre",
                 test: /\.js$/,
                 loader: "source-map-loader"
+            },
+
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader'
             }
         ]
+    },
+    plugins: [
+        new VueLoaderPlugin()
+    ],
+    devServer: {
+        inline: true,
+        hot: true,
+        stats: 'minimal',
+        overlay: true
     }
 };

@@ -10,7 +10,7 @@ const PowerupsFactory = class {
     startSpawning() {
         this.intervalId = setInterval(() => {
             const xPos = window.innerWidth * Math.random();
-            new PowerUp(xPos);
+            window.facade.physicsEngine.actors.push(new PowerUp(xPos));
         }, 2000);
     }
 }
