@@ -1,4 +1,4 @@
-import { ProjectileTypes, PlanePoint, MotionConfig } from './types';
+import {ProjectileTypes, PlanePoint, MotionConfig, UniteTypes} from './types';
 import { UniteBase } from './UniteBase';
 
 const Projectile = class extends UniteBase {
@@ -9,6 +9,7 @@ const Projectile = class extends UniteBase {
     intervalId = ''
     moveDelay = 1
     type: ProjectileTypes
+    uniteType: UniteTypes.Projectile
 
     constructor(coords: PlanePoint, projectileType: ProjectileTypes, config: MotionConfig) {
         super();
@@ -49,7 +50,7 @@ const Projectile = class extends UniteBase {
     }
 
     intersectedBy(target: any) {
-        if (this.type !== target.type) {
+        if (this.type !== target.type && target.uniteType !== UniteTypes.PowerUp) {
             target.kill();
         }
     }

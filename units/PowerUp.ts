@@ -1,5 +1,6 @@
 import { UniteBase } from './UniteBase';
 import { PowerUpTypes } from './types';
+import { ProjectileTypes, UniteTypes } from './types';
 
 const PowerUp = class extends UniteBase {
     moveSize = 2
@@ -7,6 +8,7 @@ const PowerUp = class extends UniteBase {
     xPosition = 0
     id = 'target'
     type: PowerUpTypes
+    uniteType: UniteTypes.PowerUp
 
     constructor(xPos: number) {
         super();
@@ -65,8 +67,10 @@ const PowerUp = class extends UniteBase {
         }
     }
 
-    intersectedBy() {
-        this.kill();
+    intersectedBy(target: any) {
+        if (target.uniteType === UniteTypes.Player) {
+            this.kill();
+        }
     }
 }
 

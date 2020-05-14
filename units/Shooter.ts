@@ -1,6 +1,6 @@
 import { UniteBase } from './UniteBase';
 import { Gun } from './Gun';
-import { ProjectileTypes } from './types';
+import {ProjectileTypes, UniteTypes} from './types';
 
 const Shooter = class extends UniteBase {
     id = 'shooter'
@@ -10,6 +10,7 @@ const Shooter = class extends UniteBase {
     template = `<div class="cannon"></div><div class="body"></div>`
     type = ProjectileTypes.Self
     gun: any //todo fix
+    uniteType: UniteTypes.Player
 
     constructor() {
         super();

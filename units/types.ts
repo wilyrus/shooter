@@ -18,3 +18,10 @@ export interface MotionConfig {
     moveSize: number;
     moveDelay: number;
 }
+
+export enum UniteTypes {
+    Player,
+    Enemy,
+    Projectile,
+    PowerUp
+}

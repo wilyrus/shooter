@@ -1,5 +1,5 @@
 import { UniteBase } from './UniteBase';
-import { ProjectileTypes } from './types';
+import {ProjectileTypes, UniteTypes} from './types';
 import { Gun } from './Gun';
 
 const Target = class extends UniteBase {
@@ -11,6 +11,7 @@ const Target = class extends UniteBase {
     template = ''
     type = ProjectileTypes.Enemy
     gun: any //todo fix
+    uniteType: UniteTypes.Enemy
 
     constructor() {
         super();

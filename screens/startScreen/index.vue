@@ -1,13 +1,19 @@
 <template>
     <div class="container">
-        <button v-if="!isGameInitialized" @click="$emit('startGame')">New Game</button>
-        <button v-else @click="$emit('startGame')">Respawn</button>
-        <button>Exit</button>
+        <Button v-if="!isGameInitialized" @click="$emit('startGame')">New Game</Button>
+        <Button v-else @click="$emit('startGame')">Respawn</Button>
+        <Button>Exit</Button>
     </div>
 </template>
 
 <script>
+    import Button from '../../ui-kit/button/index.vue';
+
     export default {
+        components: {
+            Button
+        },
+
         props: {
             isGameInitialized: {
                 type: String,
