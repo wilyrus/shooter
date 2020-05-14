@@ -1,13 +1,19 @@
 <template>
     <div class="container">
-        <button @click="$emit('startGame')">New Game</button>
+        <button v-if="!isGameInitialized" @click="$emit('startGame')">New Game</button>
+        <button v-else @click="$emit('startGame')">Respawn</button>
         <button>Exit</button>
     </div>
 </template>
 
 <script>
     export default {
-
+        props: {
+            isGameInitialized: {
+                type: String,
+                default: false
+            }
+        }
     }
 </script>
 

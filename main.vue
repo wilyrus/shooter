@@ -1,14 +1,18 @@
 <template>
-    <StartScreen v-if="showMenu" @startGame="startGame"/>
+    <StartScreen
+            v-if="showMenu"
+            :is-game-initialized="isGameInitialized"
+            @startGame="startGame"
+            @respawn="respawn"
+    />
     <div v-else class="menu">
-        <button id="respawn">Open menu</button>
+        <button @click="openMenu" id="respawn">Open menu</button>
     </div>
 </template>
 
 <script>
 import { Shooter } from './units/Shooter';
 import { Target } from './units/Target';
-import { Menu } from './menu';
 import { PowerupsFactory } from './factories/PowerupsFactory';
 import { PhysicsEngine } from './engines/PhysicsEngine';
 // @ts-ignore
@@ -25,7 +29,8 @@ export default {
 
     data() {
         return {
-            showMenu: true
+            showMenu: true,
+            isGameInitialized: false
         }
     },
 
@@ -33,12 +38,20 @@ export default {
         startGame() {
             this.showMenu = false;
             new PhysicsEngine();
-            new Menu();
             new PowerupsFactory();
             PhysicsEngine.actors.push(new Target(), new Target(), new Shooter());
             window.facade.physicsEngine = PhysicsEngine;
 
             console.log( '%c%s', 'color: green; font: 1.2rem/1 Tahoma;', 'elements ready' );
+            this.isGameInitialized = true;
+        },
+
+        openMenu() {
+            this.showMenu = true;
+        },
+
+        respawn() {
+            PhysicsEngine.actors.push(new Shooter());
         }
     }
 }
