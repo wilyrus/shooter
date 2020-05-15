@@ -38,11 +38,13 @@ const Projectile = class extends UniteBase {
 
     startMoving() {
         const intervalId = setInterval(() => {
-            if (this.checkOutOfBoundsExceed()) {
-                this.yPosition = this.yPosition + this.moveSize * this.direction * -1;
-                this.el.style.transform = `translate(0, ${this.yPosition}px)`;
+            if (this.isActive) {
+                if (this.checkOutOfBoundsExceed()) {
+                    this.yPosition = this.yPosition + this.moveSize * this.direction * -1;
+                    this.el.style.transform = `translate(0, ${this.yPosition}px)`;
 
-                this.eventEmitter.emit('move', this);
+                    this.eventEmitter.emit('move', this);
+                }
             }
         }, this.moveDelay);
 

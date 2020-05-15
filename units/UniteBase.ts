@@ -7,6 +7,7 @@ const UniteBase = class {
     id = ''
     el: HTMLElement
     eventEmitter: any
+    isActive = true
 
     constructor() {
         this.eventEmitter = new EventEmitter();

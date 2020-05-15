@@ -10,13 +10,13 @@ const PhysicsEngine = class {
         if (!el1 || !el2) {
             return;
         }
-        
+
         const targetLeft = el1.getLeft();
         const targetWidth = el1.getWidth();
         const el1Bottom = el1.getTop() + el1.getHeight();
         const el2Bottom = el2.getTop() + el2.getHeight();
 
-        const isYIntercest = el1Bottom <= el2.getTop() && el1.getTop() >= el2Bottom 
+        const isYIntercest = el1Bottom <= el2.getTop() && el1.getTop() >= el2Bottom
             || el1Bottom >= el2.getTop() && el1.getTop() <= el2Bottom;
         const isXIntercest = targetLeft >= el2.getLeft() + el2.getWidth() && targetLeft + targetWidth <= el2.getLeft()
             || targetLeft <= el2.getLeft() + el2.getWidth() && targetLeft + targetWidth >= el2.getLeft();
@@ -45,6 +45,10 @@ const PhysicsEngine = class {
           return true;
         }
       };
+
+    static toggleActivity(isActive: boolean): void {
+        PhysicsEngine.innerActors.forEach(actor => actor.isActive = isActive);
+    }
 }
 
 export { PhysicsEngine };

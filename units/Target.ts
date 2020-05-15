@@ -28,16 +28,20 @@ const Target = class extends UniteBase {
 
     startMoving() {
         const moveInterval = setInterval(() => {
-            this.direction = Math.floor(Math.random() * 10) % 2 === 0 ? this.direction * 1 : this.direction * -1;
+            if (this.isActive) {
+                this.direction = Math.floor(Math.random() * 10) % 2 === 0 ? this.direction * 1 : this.direction * -1;
+            }
         }, 800);
 
         const shootInterval = setInterval(() => {
-            if (this.checkOutOfBoundsExceed()) {
-                this.xPosition = this.xPosition + this.moveSize * this.direction;
-                this.el.style.transform = `translate(${this.xPosition}px, 0)`;
-                this.eventEmitter.emit('move', this);
-            } else {
-                this.direction *= -1;
+            if (this.isActive) {
+                if (this.checkOutOfBoundsExceed()) {
+                    this.xPosition = this.xPosition + this.moveSize * this.direction;
+                    this.el.style.transform = `translate(${this.xPosition}px, 0)`;
+                    this.eventEmitter.emit('move', this);
+                } else {
+                    this.direction *= -1;
+                }
             }
         }, 1);
 

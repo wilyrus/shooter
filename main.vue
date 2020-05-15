@@ -1,13 +1,14 @@
 <template>
     <StartScreen
-            v-if="showMenu"
-            :is-game-initialized="isGameInitialized"
-            @startGame="startGame"
-            @respawn="respawn"
+        v-if="showMenu"
+        :is-game-initialized="isGameInitialized"
+        @startGame="startGame"
+        @respawn="respawn"
     />
     <div v-else class="menu">
         <button @click="openMenu" id="respawn">Open menu</button>
     </div>
+    <PauseScreen v-if="showPauseScreen"/>
 </template>
 
 <script>
@@ -17,10 +18,12 @@ import { PowerupsFactory } from './factories/PowerupsFactory';
 import { PhysicsEngine } from './engines/PhysicsEngine';
 // @ts-ignore
 import StartScreen from './screens/startScreen/index.vue';
+import PauseScreen from './screens/pauseScreen/index.vue';
 
 export default {
     components: {
-        StartScreen
+        StartScreen,
+        PauseScreen
     },
 
     beforeMount() {
@@ -30,7 +33,8 @@ export default {
     data() {
         return {
             showMenu: true,
-            isGameInitialized: false
+            isGameInitialized: false,
+            showPauseScreen: false
         }
     },
 
@@ -44,6 +48,12 @@ export default {
 
             console.log( '%c%s', 'color: green; font: 1.2rem/1 Tahoma;', 'elements ready' );
             this.isGameInitialized = true;
+            window.addEventListener('visibilityChange', this.toggleActivness, false);
+            window.addEventListener('freeze', this.toggleActivness);
+
+            window.addEventListener('resume', this.toggleActivness);
+            window.addEventListener('blur', this.toggleActivness);
+            window.addEventListener('focus', this.toggleActivness);
         },
 
         openMenu() {
@@ -52,6 +62,21 @@ export default {
 
         respawn() {
             PhysicsEngine.actors.push(new Shooter());
+        },
+
+        toggleActivness(event) {
+            switch (event.type) {
+                case 'blur': {
+                    PhysicsEngine.toggleActivity(false);
+                    this.showPauseScreen = true;
+                    break;
+                }
+                case 'focus' : {
+                    PhysicsEngine.toggleActivity(true);
+                    this.showPauseScreen = false;
+                    break;
+                }
+            }
         }
     }
 }
