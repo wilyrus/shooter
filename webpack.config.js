@@ -1,10 +1,19 @@
 const { VueLoaderPlugin } = require('vue-loader')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+var path = require('path');
 
 module.exports = {
     mode: "development",
 
     entry: './main.ts',
+
+    output: {
+        path: path.join(__dirname, 'dist'),
+        publicPath: '/dist',
+        filename: 'main.js'
+    },
 
     devtool: "source-map",
 
@@ -49,12 +58,16 @@ module.exports = {
         new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
             filename: '[name].css'
+        }),
+        new HtmlWebpackPlugin({
+            template: 'main.html'
         })
     ],
     devServer: {
-        inline: true,
         hot: true,
         stats: 'minimal',
-        overlay: true
+        overlay: true,
+        contentBase: path.join(__dirname, 'dist'),
+        historyApiFallback: true
     }
 };
