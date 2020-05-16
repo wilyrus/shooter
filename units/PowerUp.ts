@@ -6,9 +6,8 @@ const PowerUp = class extends UniteBase {
     moveSize = 2
     direction = 1
     xPosition = 0
-    id = 'target'
     type: PowerUpTypes
-    uniteType: UniteTypes.PowerUp
+    uniteType = UniteTypes.PowerUp
     height = 50
     width = 50
 
@@ -68,12 +67,6 @@ const PowerUp = class extends UniteBase {
             case PowerUpTypes.ShootSpeed: {
                 return 'SS';
             }
-        }
-    }
-
-    intersectedBy(target: any) {
-        if (target.uniteType === UniteTypes.Player) {
-            this.kill();
         }
     }
 }

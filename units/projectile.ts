@@ -8,7 +8,7 @@ const Projectile = class extends UniteBase {
     intervalId = ''
     moveDelay = 1
     type: ProjectileTypes
-    uniteType: UniteTypes.Projectile
+    uniteType = UniteTypes.Projectile
     height = 40
     width = 10
 
@@ -49,12 +49,6 @@ const Projectile = class extends UniteBase {
         }, this.moveDelay);
 
         this.actionsIntervals.push(intervalId);
-    }
-
-    intersectedBy(target: any) {
-        if (this.type !== target.type && target.uniteType !== UniteTypes.PowerUp) {
-            target.kill();
-        }
     }
 }
 

@@ -3,14 +3,13 @@ import { Gun } from './Gun';
 import {ProjectileTypes, UniteTypes} from './types';
 
 const Shooter = class extends UniteBase {
-    id = 'shooter'
     gunLevel = 1
     auotshoot = false
     selector = 'shooter'
     template = `<div class="cannon"></div><div class="body"></div>`
     type = ProjectileTypes.Self
     gun: any //todo fix
-    uniteType: UniteTypes.Player
+    uniteType = UniteTypes.Player
     width = 150
     height = 30
 
@@ -55,17 +54,13 @@ const Shooter = class extends UniteBase {
     }
 
     kill() {
-        super.kill();
+        this.gun.destroy();
+        this.gun = null;
 
         document.removeEventListener('mousemove', this.move);
         document.removeEventListener('pointerdown', this.shoot);
-    }
 
-    intersectedBy(target: any) {
-        switch (target.type) {
-            case 'PowerUp': this.upgrade(target);
-            case 'EnemyProjectail': this.kill;
-        }
+        super.kill();
     }
 
     upgrade(powerUp: any) { //todo fix

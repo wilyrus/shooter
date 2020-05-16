@@ -20,6 +20,7 @@ export interface MotionConfig {
 }
 
 export enum UniteTypes {
+    None,
     Player,
     Enemy,
     Projectile,

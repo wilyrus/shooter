@@ -1,15 +1,18 @@
 import { EventEmitter } from '../services/EventEmiter';
+import { UniteTypes } from './types';
+import { uuidv4 } from '../utils';
 
 const UniteBase = class {
     xPosition = 0
     yPosition = 0
     actionsIntervals: NodeJS.Timeout[] = []
-    id = ''
+    id = uuidv4()
     el: HTMLElement
     eventEmitter: any
     isActive = true
     width = 0
     height = 0
+    uniteType = UniteTypes.None
 
     constructor() {
         this.eventEmitter = new EventEmitter();
@@ -24,8 +27,6 @@ const UniteBase = class {
     kill() {
         this.el.remove();
         this.actionsIntervals.forEach(int => clearInterval(int));
-
-        window.facade[this.id] = null; //todo remove from actors
     }
 
     checkOutOfBoundsExceed(xPosition: number = this.xPosition, yPosition: number = this.yPosition) {

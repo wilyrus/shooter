@@ -1,3 +1,5 @@
+import { UniteTypes, ProjectileTypes } from "../units/types";
+
 const PhysicsEngine = class {
     static actors: any[] = []
     private static innerActors: any[] = []
@@ -29,9 +31,45 @@ const PhysicsEngine = class {
             const isIntersected = PhysicsEngine.checkIntersection(movedElement, a);
 
             if (isIntersected) {
-                movedElement.intersectedBy(a);
-                a.intersectedBy(movedElement);
+                if (!PhysicsEngine.handleIntersection(movedElement, a)) {
+                    PhysicsEngine.handleIntersection(a, movedElement);
+                }
             }
+        });
+    }
+
+    private static handleIntersection(movedElement: any, intersectedElement: any) {
+        switch (movedElement.uniteType) {
+            case UniteTypes.Projectile: {
+                if (movedElement.type === ProjectileTypes.Enemy && intersectedElement.uniteType === UniteTypes.Player) {
+                    this.removeActors([movedElement, intersectedElement]);
+                    movedElement.kill();
+                    intersectedElement.kill();
+                    return true;
+                } else if (movedElement.type === ProjectileTypes.Self && intersectedElement.uniteType === UniteTypes.Enemy) {
+                    this.removeActors([movedElement, intersectedElement]);
+                    movedElement.kill();
+                    intersectedElement.kill();
+                    return true;
+                }
+                break;
+            }
+            case UniteTypes.PowerUp: {
+                if (intersectedElement.uniteType === UniteTypes.Player) {
+                    debugger;
+                    this.removeActors([movedElement]);
+                    movedElement.kill();
+                    intersectedElement.upgrade();
+                    return true;
+                }
+                break;
+            }
+        }
+    }
+
+    private static removeActors(actorsToRemove: any[]) {
+        actorsToRemove.forEach(actor => {
+            PhysicsEngine.actors.splice(PhysicsEngine.actors.findIndex(a => a.id === actor.id), 1);
         });
     }
 

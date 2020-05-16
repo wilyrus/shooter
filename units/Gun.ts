@@ -37,8 +37,12 @@ const Gun = class {
         clearInterval(this.autoShootInterval);
     }
 
-    shoot(projectileType: ProjectileTypes, config: MotionConfig, shooter: any) { //todo fix 
+    shoot(projectileType: ProjectileTypes, config: MotionConfig, shooter: any) { //todo fix
         WeaponsFactory.shootDouble(shooter.getShootPoint(), projectileType, config);
+    }
+
+    destroy() {
+        this.stopShoot();
     }
 }
 

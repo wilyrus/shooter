@@ -6,12 +6,11 @@ const Target = class extends UniteBase {
     moveSize = 5
     direction = 1
     xPosition = 0
-    id = 'target'
     selector= 'target'
     template = ''
     type = ProjectileTypes.Enemy
     gun: any //todo fix
-    uniteType: UniteTypes.Enemy
+    uniteType = UniteTypes.Enemy
     width =  120
     height = 30
 
@@ -50,17 +49,18 @@ const Target = class extends UniteBase {
         this.actionsIntervals.push(moveInterval, shootInterval);
     }
 
-    intersectedBy(target: any) {
-        switch (target.type) {
-            case 'SelfProjectail': this.kill;
-        }
-    }
-
     checkOutOfBoundsExceed() {
         if (this.direction === 1) {
             return this.moveSize + this.width + this.xPosition < window.innerWidth;
         }
         return this.width + this.xPosition - this.moveSize > 0;
+    }
+
+    kill() {
+        this.gun.destroy();
+        this.gun = null;
+
+        super.kill();
     }
 }
 
