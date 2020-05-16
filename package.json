@@ -6,7 +6,8 @@
   "dependencies": {
     "@vue/compiler-sfc": "^3.0.0-beta.12",
     "vue": "^3.0.0-beta.12",
-    "vue-loader": "^16.0.0-beta.2"
+    "vue-loader": "^16.0.0-beta.2",
+    "webpack-merge": "^4.2.2"
   },
   "devDependencies": {
     "css-loader": "^3.5.3",
@@ -21,8 +22,8 @@
   },
   "scripts": {
     "test": "test",
-    "run": "npx webpack",
-    "dev": "webpack-dev-server"
+    "prod": "webpack --config webpack.prod.js",
+    "dev": "webpack-dev-server --open --config webpack.dev.js"
   },
   "repository": {
     "type": "git",
