@@ -100,15 +100,32 @@ export default {
     .shooter {
         height: 30px;
         width: 150px;
-        background: green;
         position: absolute;
-        box-shadow: 0 2px 5px rgba(0,0,0,1);
+        perspective: 700px;
         will-change: transform;
     }
 
+    .shipBody {
+        height: 100%;
+        width: 100%;
+        background: green;
+        box-shadow: 0 2px 5px rgba(0,0,0,1);
+        transition: transform 0.3s;
+        z-index: 1;
+    }
+
+    .cannon {
+        background-color: greenyellow;
+        width: 20px;
+        height: 60px;
+        position: absolute;
+        bottom: 0;
+        left: 65px;
+    }
+
     .projectile {
-        height: 40px;
-        width: 10px;
+        height: 30px;
+        width: 8px;
         position: absolute;
         will-change: transform;
     }

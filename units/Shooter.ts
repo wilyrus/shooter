@@ -6,12 +6,14 @@ const Shooter = class extends UniteBase {
     gunLevel = 1
     auotshoot = false
     selector = 'shooter'
-    template = `<div class="cannon"></div><div class="body"></div>`
+    template = `<div class="cannon"></div><div class="shipBody"></div>`
     type = ProjectileTypes.Self
     gun: any //todo fix
     uniteType = UniteTypes.Player
     width = 150
     height = 30
+    shipBody: any
+    cleatTransformTimeout: NodeJS.Timeout
 
     constructor() {
         super();
@@ -22,6 +24,7 @@ const Shooter = class extends UniteBase {
         document.body.append(newDiv);
         this.el = newDiv;
         this.gun = new Gun(this.type);
+        this.shipBody = this.el.querySelector('.shipBody');
 
         this.startTrackingMouse();
     }
@@ -31,10 +34,17 @@ const Shooter = class extends UniteBase {
         const yPosition = event.clientY;
 
         if (this.checkOutOfBoundsExceed(xPosition, yPosition)) {
+            clearTimeout(this.cleatTransformTimeout);
+            const rotateDeg = this.xPosition - xPosition > 0 ? -50 : 50;
             this.xPosition = xPosition;
             this.yPosition = yPosition;
 
             this.el.style.transform = `translate(${this.xPosition}px, ${this.yPosition}px)`;
+            this.shipBody.style.transform = `rotateY(${rotateDeg}deg)`;
+
+            this.cleatTransformTimeout = setTimeout(() => {
+                this.shipBody.style.transform = '';
+            }, 100);
             this.eventEmitter.emit('move', this);
         }
     }

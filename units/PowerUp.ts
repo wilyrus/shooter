@@ -18,7 +18,7 @@ const PowerUp = class extends UniteBase {
         this.el.classList.add('powerUp');
         this.el.classList.add(this.type);
         this.el.innerHTML = this.getInnerHTML(this.type);
-        this.el.style.left = `${xPos}px`;
+        this.xPosition = xPos;
 
         document.querySelector('body').appendChild(this.el);
         this.startMoving();
@@ -29,7 +29,7 @@ const PowerUp = class extends UniteBase {
             if (this.isActive) {
                 if (this.checkOutOfBoundsExceed()) {
                     this.yPosition = this.yPosition + this.moveSize;
-                    this.el.style.transform = `translate(0, ${this.yPosition}px)`;
+                    this.el.style.transform = `translate(${this.xPosition}px, ${this.yPosition}px)`;
 
                     this.eventEmitter.emit('move', this);
                 }

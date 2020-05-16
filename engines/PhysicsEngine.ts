@@ -56,10 +56,9 @@ const PhysicsEngine = class {
             }
             case UniteTypes.PowerUp: {
                 if (intersectedElement.uniteType === UniteTypes.Player) {
-                    debugger;
                     this.removeActors([movedElement]);
+                    intersectedElement.upgrade(movedElement);
                     movedElement.kill();
-                    intersectedElement.upgrade();
                     return true;
                 }
                 break;
