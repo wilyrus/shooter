@@ -10,6 +10,8 @@ const Projectile = class extends UniteBase {
     moveDelay = 1
     type: ProjectileTypes
     uniteType: UniteTypes.Projectile
+    height = 40
+    width = 10
 
     constructor(coords: PlanePoint, projectileType: ProjectileTypes, config: MotionConfig) {
         super();

@@ -11,15 +11,15 @@ const PhysicsEngine = class {
             return;
         }
 
-        const targetLeft = el1.getLeft();
-        const targetWidth = el1.getWidth();
-        const el1Bottom = el1.getTop() + el1.getHeight();
-        const el2Bottom = el2.getTop() + el2.getHeight();
+        const targetLeft = el1.xPosition;
+        const targetWidth = el1.width;
+        const el1Bottom = el1.yPosition + el1.height;
+        const el2Bottom = el2.yPosition + el2.height;
 
-        const isYIntercest = el1Bottom <= el2.getTop() && el1.getTop() >= el2Bottom
-            || el1Bottom >= el2.getTop() && el1.getTop() <= el2Bottom;
-        const isXIntercest = targetLeft >= el2.getLeft() + el2.getWidth() && targetLeft + targetWidth <= el2.getLeft()
-            || targetLeft <= el2.getLeft() + el2.getWidth() && targetLeft + targetWidth >= el2.getLeft();
+        const isYIntercest = el1Bottom <= el2.yPosition && el1.yPosition >= el2Bottom
+            || el1Bottom >= el2.yPosition && el1.yPosition <= el2Bottom;
+        const isXIntercest = targetLeft >= el2.xPosition + el2.width && targetLeft + targetWidth <= el2.xPosition
+            || targetLeft <= el2.xPosition + el2.width && targetLeft + targetWidth >= el2.xPosition;
 
         return isYIntercest && isXIntercest;
     }

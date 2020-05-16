@@ -9,6 +9,8 @@ const PowerUp = class extends UniteBase {
     id = 'target'
     type: PowerUpTypes
     uniteType: UniteTypes.PowerUp
+    height = 50
+    width = 50
 
     constructor(xPos: number) {
         super();

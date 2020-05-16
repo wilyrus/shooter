@@ -60,12 +60,5 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: 'main.html'
         })
-    ],
-    devServer: {
-        hot: true,
-        stats: 'minimal',
-        overlay: true,
-        contentBase: path.join(__dirname, 'dist'),
-        historyApiFallback: true
-    }
+    ]
 };

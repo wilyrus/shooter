@@ -12,6 +12,8 @@ const Target = class extends UniteBase {
     type = ProjectileTypes.Enemy
     gun: any //todo fix
     uniteType: UniteTypes.Enemy
+    width =  120
+    height = 30
 
     constructor() {
         super();
@@ -56,9 +58,9 @@ const Target = class extends UniteBase {
 
     checkOutOfBoundsExceed() {
         if (this.direction === 1) {
-            return this.moveSize + this.el.getBoundingClientRect().width + this.xPosition < window.innerWidth;
+            return this.moveSize + this.width + this.xPosition < window.innerWidth;
         }
-        return this.el.getBoundingClientRect().width + this.xPosition - this.moveSize > 0;
+        return this.width + this.xPosition - this.moveSize > 0;
     }
 }
 

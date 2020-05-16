@@ -11,6 +11,8 @@ const Shooter = class extends UniteBase {
     type = ProjectileTypes.Self
     gun: any //todo fix
     uniteType: UniteTypes.Player
+    width = 150
+    height = 30
 
     constructor() {
         super();

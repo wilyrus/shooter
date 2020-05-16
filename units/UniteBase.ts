@@ -8,15 +8,17 @@ const UniteBase = class {
     el: HTMLElement
     eventEmitter: any
     isActive = true
+    width = 0
+    height = 0
 
     constructor() {
         this.eventEmitter = new EventEmitter();
     }
 
     getShootPoint() {
-        const leftCenter = this.getLeft() + this.getWidth() / 2;
+        const leftCenter = this.xPosition + this.width / 2;
 
-        return { x: leftCenter, y: this.getTop() };
+        return { x: leftCenter, y: this.yPosition };
     }
 
     kill() {
@@ -26,24 +28,8 @@ const UniteBase = class {
         window.facade[this.id] = null; //todo remove from actors
     }
 
-    getTop() {
-        return this.el.getBoundingClientRect().top;
-    }
-
-    getLeft(): number {
-        return this.el.getBoundingClientRect().left;
-    }
-
-    getWidth() {
-        return this.el.getBoundingClientRect().width;
-    }
-
-    getHeight() {
-        return this.el.getBoundingClientRect().height;
-    }
-
-    checkOutOfBoundsExceed(xPosition?: number, yPosition?: number) {
-        const isExceed = this.getTop() + this.getHeight() <= 0 || this.getTop() > window.innerHeight;
+    checkOutOfBoundsExceed(xPosition: number = this.xPosition, yPosition: number = this.yPosition) {
+        const isExceed = yPosition + this.height <= 0 || yPosition > window.innerHeight;
 
         if (isExceed) {
             this.kill();
