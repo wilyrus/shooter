@@ -3,7 +3,6 @@ import { UniteBase } from './UniteBase';
 
 const Projectile = class extends UniteBase {
     selector = 'projectile'
-    template =  "<div></div>"
     moveSize = 2
     direction = 1
     intervalId = ''
@@ -30,7 +29,6 @@ const Projectile = class extends UniteBase {
         const newDiv = document.createElement("div");
         newDiv.classList.add(this.selector);
         newDiv.classList.add(className);
-        newDiv.innerHTML = this.template;
         this.xPosition = coords.x;
         this.yPosition = coords.y;
         document.body.append(newDiv);

@@ -67,17 +67,20 @@
     .projectile {
         height: 40px;
         width: 10px;
-        border-radius: 25%;
         position: absolute;
         will-change: transform;
     }
 
     .projectile.enemyProj {
         background: red;
+        border-bottom-right-radius: 40%;
+        border-bottom-left-radius: 40%;
     }
 
     .projectile.allyProj {
         background: blue;
+        border-top-right-radius: 40%;
+        border-top-left-radius: 40%;
     }
 
     .powerUp {
