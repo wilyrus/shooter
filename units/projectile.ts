@@ -31,8 +31,8 @@ const Projectile = class extends UniteBase {
         newDiv.classList.add(this.selector);
         newDiv.classList.add(className);
         newDiv.innerHTML = this.template;
-        newDiv.style.left = `${coords.x}`;
-        newDiv.style.top = `${coords.y}`;
+        this.xPosition = coords.x;
+        this.yPosition = coords.y;
         document.body.append(newDiv);
         this.el = newDiv;
         this.startMoving();
@@ -43,7 +43,7 @@ const Projectile = class extends UniteBase {
             if (this.isActive) {
                 if (this.checkOutOfBoundsExceed()) {
                     this.yPosition = this.yPosition + this.moveSize * this.direction * -1;
-                    this.el.style.transform = `translate(0, ${this.yPosition}px)`;
+                    this.el.style.transform = `translate(${this.xPosition}px, ${this.yPosition}px)`;
 
                     this.eventEmitter.emit('move', this);
                 }

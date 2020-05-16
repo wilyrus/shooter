@@ -25,6 +25,7 @@
 
 <style scoped>
     .container {
+        position: fixed;
         background-color: rgba(0,0,0,0.5);
         width: 100%;
         height: 100%;
