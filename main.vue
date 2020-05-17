@@ -1,14 +1,17 @@
 <template>
-    <StartScreen
-        v-if="showMenu"
-        :is-game-initialized="isGameInitialized"
-        @startGame="startGame"
-        @respawn="respawn"
-    />
-    <div v-else class="menu">
-        <button @click="openMenu" id="respawn">Open menu</button>
+    <div>
+        <StartScreen
+            v-if="showMenu"
+            :is-game-initialized="isGameInitialized"
+            @startGame="startGame"
+            @respawn="respawn"
+        />
+        <div v-else class="menu">
+            <button @click="openMenu" id="respawn">Open menu</button>
+        </div>
+        <PauseScreen v-if="showPauseScreen"/>
+        <HUD v-if="isGameInitialized"/>
     </div>
-    <PauseScreen v-if="showPauseScreen"/>
 </template>
 
 <script>
@@ -19,11 +22,13 @@ import { PhysicsEngine } from './engines/PhysicsEngine';
 // @ts-ignore
 import StartScreen from './screens/startScreen/index.vue';
 import PauseScreen from './screens/pauseScreen/index.vue';
+import HUD from './screens/hud/index.vue';
 
 export default {
   components: {
     StartScreen,
-    PauseScreen
+    PauseScreen,
+    HUD
   },
 
   beforeMount() {
