@@ -15,29 +15,29 @@ const UniteBase = class {
     uniteType = UniteTypes.None
 
     constructor() {
-        this.eventEmitter = new EventEmitter();
+      this.eventEmitter = new EventEmitter();
     }
 
     getShootPoint() {
-        const leftCenter = this.xPosition + this.width / 2;
+      const leftCenter = this.xPosition + this.width / 2;
 
-        return { x: leftCenter, y: this.yPosition };
+      return { x: leftCenter, y: this.yPosition };
     }
 
     kill() {
-        this.el.remove();
-        this.actionsIntervals.forEach(int => clearInterval(int));
+      this.el.remove();
+      this.actionsIntervals.forEach(int => clearInterval(int));
     }
 
     checkOutOfBoundsExceed(xPosition: number = this.xPosition, yPosition: number = this.yPosition) {
-        const isExceed = yPosition + this.height <= 0 || yPosition > window.innerHeight;
+      const isExceed = yPosition + this.height <= 0 || yPosition > window.innerHeight;
 
-        if (isExceed) {
-            this.kill();
-            return false;
-        }
-        return true;
+      if (isExceed) {
+        this.kill();
+        return false;
+      }
+      return true;
     }
-}
+};
 
 export { UniteBase };

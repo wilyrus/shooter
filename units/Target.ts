@@ -15,53 +15,53 @@ const Target = class extends UniteBase {
     height = 30
 
     constructor() {
-        super();
-        const newDiv = document.createElement("div");
-        newDiv.classList.add(this.selector);
-        newDiv.innerHTML = this.template;
-        document.body.append(newDiv);
-        this.el = newDiv;
-        this.gun = new Gun(this.type);
+      super();
+      const newDiv = document.createElement('div');
+      newDiv.classList.add(this.selector);
+      newDiv.innerHTML = this.template;
+      document.body.append(newDiv);
+      this.el = newDiv;
+      this.gun = new Gun(this.type);
 
-        this.startMoving();
-        this.gun.startShoot(this);
+      this.startMoving();
+      this.gun.startShoot(this);
     }
 
     startMoving() {
-        const moveInterval = setInterval(() => {
-            if (this.isActive) {
-                this.direction = Math.floor(Math.random() * 10) % 2 === 0 ? this.direction * 1 : this.direction * -1;
-            }
-        }, 800);
+      const moveInterval = setInterval(() => {
+        if (this.isActive) {
+          this.direction = Math.floor(Math.random() * 10) % 2 === 0 ? this.direction : this.direction * -1;
+        }
+      }, 800);
 
-        const shootInterval = setInterval(() => {
-            if (this.isActive) {
-                if (this.checkOutOfBoundsExceed()) {
-                    this.xPosition = this.xPosition + this.moveSize * this.direction;
-                    this.el.style.transform = `translate(${this.xPosition}px, 0)`;
-                    this.eventEmitter.emit('move', this);
-                } else {
-                    this.direction *= -1;
-                }
-            }
-        }, 1);
+      const shootInterval = setInterval(() => {
+        if (this.isActive) {
+          if (this.checkOutOfBoundsExceed()) {
+            this.xPosition = this.xPosition + this.moveSize * this.direction;
+            this.el.style.transform = `translate(${this.xPosition}px, 0)`;
+            this.eventEmitter.emit('move', this);
+          } else {
+            this.direction *= -1;
+          }
+        }
+      }, 1);
 
-        this.actionsIntervals.push(moveInterval, shootInterval);
+      this.actionsIntervals.push(moveInterval, shootInterval);
     }
 
     checkOutOfBoundsExceed() {
-        if (this.direction === 1) {
-            return this.moveSize + this.width + this.xPosition < window.innerWidth;
-        }
-        return this.width + this.xPosition - this.moveSize > 0;
+      if (this.direction === 1) {
+        return this.moveSize + this.width + this.xPosition < window.innerWidth;
+      }
+      return this.width + this.xPosition - this.moveSize > 0;
     }
 
     kill() {
-        this.gun.destroy();
-        this.gun = null;
+      this.gun.destroy();
+      this.gun = null;
 
-        super.kill();
+      super.kill();
     }
-}
+};
 
 export { Target };

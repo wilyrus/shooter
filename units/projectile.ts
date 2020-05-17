@@ -13,43 +13,43 @@ const Projectile = class extends UniteBase {
     width = 8
 
     constructor(coords: PlanePoint, projectileType: ProjectileTypes, config: MotionConfig) {
-        super();
-        this.moveSize = config.moveSize || 2;
-        this.moveDelay = config.moveDelay || 1;
-        let className = '';
-        this.type = projectileType;
+      super();
+      this.moveSize = config.moveSize || 2;
+      this.moveDelay = config.moveDelay || 1;
+      let className = '';
+      this.type = projectileType;
 
-        if (projectileType === ProjectileTypes.Enemy) {
-            this.direction = -1;
-            className = 'enemyProj';
-        } else {
-            className = 'allyProj';
-        }
+      if (projectileType === ProjectileTypes.Enemy) {
+        this.direction = -1;
+        className = 'enemyProj';
+      } else {
+        className = 'allyProj';
+      }
 
-        const newDiv = document.createElement("div");
-        newDiv.classList.add(this.selector);
-        newDiv.classList.add(className);
-        this.xPosition = coords.x;
-        this.yPosition = coords.y;
-        document.body.append(newDiv);
-        this.el = newDiv;
-        this.startMoving();
+      const newDiv = document.createElement('div');
+      newDiv.classList.add(this.selector);
+      newDiv.classList.add(className);
+      this.xPosition = coords.x;
+      this.yPosition = coords.y;
+      document.body.append(newDiv);
+      this.el = newDiv;
+      this.startMoving();
     }
 
     startMoving() {
-        const intervalId = setInterval(() => {
-            if (this.isActive) {
-                if (this.checkOutOfBoundsExceed()) {
-                    this.yPosition = this.yPosition + this.moveSize * this.direction * -1;
-                    this.el.style.transform = `translate(${this.xPosition}px, ${this.yPosition}px)`;
+      const intervalId = setInterval(() => {
+        if (this.isActive) {
+          if (this.checkOutOfBoundsExceed()) {
+            this.yPosition = this.yPosition + this.moveSize * this.direction * -1;
+            this.el.style.transform = `translate(${this.xPosition}px, ${this.yPosition}px)`;
 
-                    this.eventEmitter.emit('move', this);
-                }
-            }
-        }, this.moveDelay);
+            this.eventEmitter.emit('move', this);
+          }
+        }
+      }, this.moveDelay);
 
-        this.actionsIntervals.push(intervalId);
+      this.actionsIntervals.push(intervalId);
     }
-}
+};
 
 export { Projectile };

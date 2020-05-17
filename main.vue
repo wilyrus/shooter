@@ -21,65 +21,65 @@ import StartScreen from './screens/startScreen/index.vue';
 import PauseScreen from './screens/pauseScreen/index.vue';
 
 export default {
-    components: {
-        StartScreen,
-        PauseScreen
+  components: {
+    StartScreen,
+    PauseScreen
+  },
+
+  beforeMount() {
+    window.facade = {};
+  },
+
+  data() {
+    return {
+      showMenu: true,
+      isGameInitialized: false,
+      showPauseScreen: false
+    };
+  },
+
+  methods: {
+    startGame() {
+      this.showMenu = false;
+      new PhysicsEngine();
+      new PowerupsFactory();
+      PhysicsEngine.actors.push(new Target(), new Target(), new Shooter());
+      window.facade.physicsEngine = PhysicsEngine;
+
+      console.log( '%c%s', 'color: green; font: 1.2rem/1 Tahoma;', 'elements ready' );
+      this.isGameInitialized = true;
+      window.addEventListener('visibilityChange', this.toggleActivness, false);
+      window.addEventListener('freeze', this.toggleActivness);
+
+      window.addEventListener('resume', this.toggleActivness);
+      window.addEventListener('blur', this.toggleActivness);
+      window.addEventListener('focus', this.toggleActivness);
     },
 
-    beforeMount() {
-        window.facade = {};
+    openMenu() {
+      this.showMenu = true;
     },
 
-    data() {
-        return {
-            showMenu: true,
-            isGameInitialized: false,
-            showPauseScreen: false
-        }
+    respawn() {
+      PhysicsEngine.actors.push(new Shooter());
     },
 
-    methods: {
-        startGame() {
-            this.showMenu = false;
-            new PhysicsEngine();
-            new PowerupsFactory();
-            PhysicsEngine.actors.push(new Target(), new Target(), new Shooter());
-            window.facade.physicsEngine = PhysicsEngine;
-
-            console.log( '%c%s', 'color: green; font: 1.2rem/1 Tahoma;', 'elements ready' );
-            this.isGameInitialized = true;
-            window.addEventListener('visibilityChange', this.toggleActivness, false);
-            window.addEventListener('freeze', this.toggleActivness);
-
-            window.addEventListener('resume', this.toggleActivness);
-            window.addEventListener('blur', this.toggleActivness);
-            window.addEventListener('focus', this.toggleActivness);
-        },
-
-        openMenu() {
-            this.showMenu = true;
-        },
-
-        respawn() {
-            PhysicsEngine.actors.push(new Shooter());
-        },
-
-        toggleActivness(event) {
-            switch (event.type) {
-                case 'blur': {
-                    PhysicsEngine.toggleActivity(false);
-                    this.showPauseScreen = true;
-                    break;
-                }
-                case 'focus' : {
-                    PhysicsEngine.toggleActivity(true);
-                    this.showPauseScreen = false;
-                    break;
-                }
-            }
-        }
+    toggleActivness(event) {
+      switch (event.type) {
+      case 'blur': {
+        PhysicsEngine.toggleActivity(false);
+        this.showPauseScreen = true;
+        break;
+      }
+      case 'focus' : {
+        PhysicsEngine.toggleActivity(true);
+        this.showPauseScreen = false;
+        break;
+      }
+      }
     }
-}
+  }
+};
 </script>
 
 <style>

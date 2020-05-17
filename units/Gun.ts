@@ -10,40 +10,40 @@ const Gun = class {
     autoShootInterval: NodeJS.Timeout
 
     constructor(projectileType: ProjectileTypes) {
-        this.projectileType = projectileType;
+      this.projectileType = projectileType;
     }
 
     upgrade(upgradeType: PowerUpTypes) {
-        switch (upgradeType) {
-            case PowerUpTypes.FlySpeed: {
-                return this.projectailSpeed + 1;
-            }
-            case PowerUpTypes.Power: {
-                return 'PW';
-            }
-            case PowerUpTypes.ShootSpeed: {
-                return this.shootSpeed + 50;
-            }
-        }
+      switch (upgradeType) {
+      case PowerUpTypes.FlySpeed: {
+        return this.projectailSpeed + 1;
+      }
+      case PowerUpTypes.Power: {
+        return 'PW';
+      }
+      case PowerUpTypes.ShootSpeed: {
+        return this.shootSpeed + 50;
+      }
+      }
     }
 
     startShoot(shooter: any) { //todo fix
-        this.autoShootInterval = setInterval(() =>
-         this.shoot(this.projectileType, { moveSize: 5 + this.projectailSpeed, moveDelay: 2 }, shooter),
-          1000 - this.shootSpeed > 300 ? 1000 - this.shootSpeed : 300);
+      this.autoShootInterval = setInterval(() =>
+        this.shoot(this.projectileType, { moveSize: 5 + this.projectailSpeed, moveDelay: 2 }, shooter),
+      1000 - this.shootSpeed > 300 ? 1000 - this.shootSpeed : 300);
     }
 
     stopShoot() {
-        clearInterval(this.autoShootInterval);
+      clearInterval(this.autoShootInterval);
     }
 
     shoot(projectileType: ProjectileTypes, config: MotionConfig, shooter: any) { //todo fix
-        WeaponsFactory.shootDouble(shooter.getShootPoint(), projectileType, config);
+      WeaponsFactory.shootDouble(shooter.getShootPoint(), projectileType, config);
     }
 
     destroy() {
-        this.stopShoot();
+      this.stopShoot();
     }
-}
+};
 
 export { Gun };

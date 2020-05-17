@@ -1,6 +1,7 @@
 <template>
     <div class="container">
-        <div>Game have been paused</div>
+        <div class="healthCircle"></div>
+        <div class="gunUpgradeCircle"></div>
     </div>
 </template>
 
@@ -19,8 +20,9 @@ export default {
     .container {
         position: fixed;
         background-color: rgba(0,0,0,0.5);
-        width: 100%;
-        height: 100%;
+        left: 0;
+        bottom: 0;
+        height: 80px;
         display: flex;
         justify-content: center;
         align-items: center;
