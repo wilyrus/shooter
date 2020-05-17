@@ -26,6 +26,8 @@ const Shooter = class extends UniteBase {
       this.gun = new Gun(this.type);
       this.shipBody = this.el.querySelector('.shipBody');
 
+      this.move = this.move.bind(this);
+      this.shoot = this.shoot.bind(this);
       this.startTrackingMouse();
     }
 
@@ -58,14 +60,14 @@ const Shooter = class extends UniteBase {
       }
     }
 
-    startTrackingMouse = () => {
-      document.addEventListener('mousemove', this.move.bind(this));
-      document.addEventListener('pointerdown', this.shoot.bind(this));
+    startTrackingMouse() {
+      document.addEventListener('mousemove', this.move);
+      document.addEventListener('pointerdown', this.shoot);
     }
 
     kill() {
       this.gun.destroy();
-      this.gun = null;
+      delete this.gun;
 
       document.removeEventListener('mousemove', this.move);
       document.removeEventListener('pointerdown', this.shoot);

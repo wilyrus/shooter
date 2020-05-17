@@ -27,6 +27,8 @@ const UniteBase = class {
     kill() {
       this.el.remove();
       this.actionsIntervals.forEach(int => clearInterval(int));
+      delete this.eventEmitter;
+      delete this.el;
     }
 
     checkOutOfBoundsExceed(xPosition: number = this.xPosition, yPosition: number = this.yPosition) {
