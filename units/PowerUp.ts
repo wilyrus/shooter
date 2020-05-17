@@ -1,6 +1,6 @@
 import { UniteBase } from './UniteBase';
 import { PowerUpTypes } from './types';
-import { ProjectileTypes, UniteTypes } from './types';
+import { UniteTypes } from './types';
 
 const PowerUp = class extends UniteBase {
     moveSize = 2
@@ -39,7 +39,7 @@ const PowerUp = class extends UniteBase {
 
     getRandomType() {
       let min = 0;
-      let max = 2;
+      let max = 3;
 
       const randomTypeIndex = Math.floor(Math.random() * (max - min + 1) + min);
 
@@ -52,6 +52,9 @@ const PowerUp = class extends UniteBase {
       }
       case 2: {
         return PowerUpTypes.ShootSpeed;
+      }
+      case 3: {
+        return PowerUpTypes.WeaponUpgrade;
       }
       }
     }
@@ -66,6 +69,9 @@ const PowerUp = class extends UniteBase {
       }
       case PowerUpTypes.ShootSpeed: {
         return 'SS';
+      }
+      case PowerUpTypes.WeaponUpgrade: {
+        return 'WU';
       }
       }
     }

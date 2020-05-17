@@ -13,6 +13,7 @@ const UniteBase = class {
     width = 0
     height = 0
     uniteType = UniteTypes.None
+    health = 100
 
     constructor() {
       this.eventEmitter = new EventEmitter();
@@ -31,7 +32,7 @@ const UniteBase = class {
       delete this.el;
     }
 
-    checkOutOfBoundsExceed(xPosition: number = this.xPosition, yPosition: number = this.yPosition) {
+    checkOutOfBoundsExceed(xPosition: number = this.xPosition, yPosition: number = this.yPosition) { //todo unify
       const isExceed = yPosition + this.height <= 0 || yPosition > window.innerHeight;
 
       if (isExceed) {

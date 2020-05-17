@@ -14,7 +14,8 @@ const Target = class extends UniteBase {
     width =  120
     height = 30
 
-    constructor() {
+    // eslint-disable-next-line no-unused-vars
+    constructor(config: any = {}) {
       super();
       const newDiv = document.createElement('div');
       newDiv.classList.add(this.selector);

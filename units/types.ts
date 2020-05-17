@@ -1,7 +1,8 @@
 export enum PowerUpTypes {
     'FlySpeed' = 'flySpeed',
     'Power' = 'power',
-    'ShootSpeed' = 'shootSpeed'
+    'ShootSpeed' = 'shootSpeed',
+    'WeaponUpgrade' = 'WeaponUpgrade'
 }
 
 export enum ProjectileTypes {

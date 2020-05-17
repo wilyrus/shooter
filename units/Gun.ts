@@ -8,9 +8,16 @@ const Gun = class {
     power = 1
     projectileType: ProjectileTypes
     autoShootInterval: NodeJS.Timeout
+    weaponType = 0;
+    weaponTypeMap = {
+      0: WeaponsFactory.shootSingle,
+      1: WeaponsFactory.shootDouble,
+      2: WeaponsFactory.shootSpread
+    }
 
-    constructor(projectileType: ProjectileTypes) {
+    constructor(projectileType: ProjectileTypes, weaponType: number = 0) {
       this.projectileType = projectileType;
+      this.weaponType = weaponType;
     }
 
     upgrade(upgradeType: PowerUpTypes) {
@@ -24,12 +31,20 @@ const Gun = class {
       case PowerUpTypes.ShootSpeed: {
         return this.shootSpeed + 50;
       }
+      case PowerUpTypes.WeaponUpgrade: {
+        if (this.weaponType < 2) {
+          this.weaponType++;
+        }
+      }
       }
     }
 
     startShoot(shooter: any) { //todo fix
       this.autoShootInterval = setInterval(() =>
-        this.shoot(this.projectileType, { moveSize: 5 + this.projectailSpeed, moveDelay: 2 }, shooter),
+        this.shoot(this.projectileType, {
+          moveSize: 5 + this.projectailSpeed,
+          moveDelay: 2 },
+        shooter),
       1000 - this.shootSpeed > 300 ? 1000 - this.shootSpeed : 300);
     }
 
@@ -38,7 +53,8 @@ const Gun = class {
     }
 
     shoot(projectileType: ProjectileTypes, config: MotionConfig, shooter: any) { //todo fix
-      WeaponsFactory.shootDouble(shooter.getShootPoint(), projectileType, config);
+      // @ts-ignore
+      this.weaponTypeMap[this.weaponType](shooter.getShootPoint(), projectileType, config);
     }
 
     destroy() {

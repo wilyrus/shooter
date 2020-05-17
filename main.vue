@@ -19,6 +19,7 @@ import { Shooter } from './units/Shooter';
 import { Target } from './units/Target';
 import { PowerupsFactory } from './factories/PowerupsFactory';
 import { PhysicsEngine } from './engines/PhysicsEngine';
+import { LevelsEngine } from './engines/LevelsEngine';
 // @ts-ignore
 import StartScreen from './screens/startScreen/index.vue';
 import PauseScreen from './screens/pauseScreen/index.vue';
@@ -48,7 +49,8 @@ export default {
       this.showMenu = false;
       new PhysicsEngine();
       new PowerupsFactory();
-      PhysicsEngine.actors.push(new Target(), new Target(), new Shooter());
+      this.LevelsEngine = new LevelsEngine();
+      PhysicsEngine.actors.push(new Shooter());
       window.facade.physicsEngine = PhysicsEngine;
 
       console.log( '%c%s', 'color: green; font: 1.2rem/1 Tahoma;', 'elements ready' );
@@ -59,6 +61,8 @@ export default {
       window.addEventListener('resume', this.toggleActivness);
       window.addEventListener('blur', this.toggleActivness);
       window.addEventListener('focus', this.toggleActivness);
+
+      this.LevelsEngine.startLevel();
     },
 
     openMenu() {

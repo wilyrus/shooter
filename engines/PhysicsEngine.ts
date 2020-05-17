@@ -1,8 +1,10 @@
 import { UniteTypes, ProjectileTypes } from '../units/types';
+import {EventEmitter} from '../services/EventEmiter';
 
 const PhysicsEngine = class {
     static actors: any[] = []
     private static innerActors: any[] = []
+    eventEmitter = new EventEmitter()
 
     constructor() {
       PhysicsEngine.actors = new Proxy(PhysicsEngine.innerActors, this.arrayChangeHandler);
