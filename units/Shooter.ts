@@ -35,7 +35,7 @@ const Shooter = class extends UniteBase {
       const xPosition = event.clientX;
       const yPosition = event.clientY;
 
-      if (this.checkOutOfBoundsExceed(xPosition, yPosition)) {
+      if (!this.checkOutOfBoundsExceed(xPosition, yPosition)) {
         clearTimeout(this.cleatTransformTimeout);
         const rotateDeg = this.xPosition - xPosition > 0 ? -50 : 50;
         this.xPosition = xPosition;

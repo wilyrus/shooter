@@ -16,7 +16,6 @@
 
 <script>
 import { Shooter } from './units/Shooter';
-import { Target } from './units/Target';
 import { PowerupsFactory } from './factories/PowerupsFactory';
 import { PhysicsEngine } from './engines/PhysicsEngine';
 import { LevelsEngine } from './engines/LevelsEngine';

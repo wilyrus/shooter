@@ -37,24 +37,17 @@ const Target = class extends UniteBase {
 
       const shootInterval = setInterval(() => {
         if (this.isActive) {
-          if (this.checkOutOfBoundsExceed()) {
+          if (this.checkOutOfBoundsExceed(this.xPosition + this.moveSize * this.direction, this.yPosition)) {
+            this.direction *= -1;
+          } else {
             this.xPosition = this.xPosition + this.moveSize * this.direction;
             this.el.style.transform = `translate(${this.xPosition}px, 0)`;
             this.eventEmitter.emit('move', this);
-          } else {
-            this.direction *= -1;
           }
         }
       }, 1);
 
       this.actionsIntervals.push(moveInterval, shootInterval);
-    }
-
-    checkOutOfBoundsExceed() {
-      if (this.direction === 1) {
-        return this.moveSize + this.width + this.xPosition < window.innerWidth;
-      }
-      return this.width + this.xPosition - this.moveSize > 0;
     }
 
     kill() {

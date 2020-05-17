@@ -40,6 +40,8 @@ const Projectile = class extends UniteBase {
       const intervalId = setInterval(() => {
         if (this.isActive) {
           if (this.checkOutOfBoundsExceed()) {
+            this.kill();
+          } else {
             this.yPosition = this.yPosition + this.moveSize * this.direction * -1;
             this.el.style.transform = `translate(${this.xPosition}px, ${this.yPosition}px)`;
 

@@ -28,6 +28,8 @@ const PowerUp = class extends UniteBase {
       this.actionsIntervals.push( setInterval(() => {
         if (this.isActive) {
           if (this.checkOutOfBoundsExceed()) {
+            this.kill();
+          } else {
             this.yPosition = this.yPosition + this.moveSize;
             this.el.style.transform = `translate(${this.xPosition}px, ${this.yPosition}px)`;
 

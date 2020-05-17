@@ -33,13 +33,10 @@ const UniteBase = class {
     }
 
     checkOutOfBoundsExceed(xPosition: number = this.xPosition, yPosition: number = this.yPosition) { //todo unify
-      const isExceed = yPosition + this.height <= 0 || yPosition > window.innerHeight;
+      const isYPositionExceed = yPosition + this.height <= 0 || yPosition > window.innerHeight;
+      const isXPositionExceed = xPosition + this.width >= window.innerWidth || xPosition <= 0;
 
-      if (isExceed) {
-        this.kill();
-        return false;
-      }
-      return true;
+      return isYPositionExceed || isXPositionExceed;
     }
 };
 
