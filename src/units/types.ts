@@ -27,3 +27,10 @@ export enum UniteTypes {
     Projectile,
     PowerUp
 }
+
+export interface IUnite {
+    getShootPoint(): { x: number, y: number }
+
+    xPosition: number
+    yPosition: number
+}

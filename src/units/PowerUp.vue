@@ -95,7 +95,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
     .powerUp {
         background-color: bisque;
         height: 50px;

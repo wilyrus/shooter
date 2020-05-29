@@ -79,7 +79,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
   .projectile {
     height: 30px;
     width: 8px;

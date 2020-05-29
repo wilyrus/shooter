@@ -1,4 +1,4 @@
-import PowerUpVue from '../units/PowerUpVue.vue';
+import PowerUpVue from '../units/PowerUp.vue';
 import { store } from '../store';
 
 const PowerupsFactory = class {
@@ -14,7 +14,7 @@ const PowerupsFactory = class {
       this.intervalId = setInterval(() => {
         const xPos = window.innerWidth * Math.random();
 
-        store.dispatch('addActor', { type: PowerUpVue, config: { xPos } });
+        store.commit('addActor', { type: PowerUpVue, config: { xPos } });
       }, 2000);
     }
 };

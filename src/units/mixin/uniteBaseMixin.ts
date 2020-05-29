@@ -5,10 +5,14 @@ const uniteBaseMixin: any = {
   data() {
     return {
       isActive: true,
-      // @ts-ignore
-      actionsIntervals: [],
+      actionsIntervals: [] as Array<NodeJS.Timeout>,
       health: 100
     };
+  },
+
+  mounted() {
+    // todo wtf
+    //store.commit('setInstance', { id: this.id, el: this });
   },
 
   methods: {
@@ -34,7 +38,7 @@ const uniteBaseMixin: any = {
         this.gun.destroy();
       }
 
-      store.dispatch('removeActor', this);
+      store.commit('removeActor', this);
     },
 
     checkOutOfBoundsExceed(xPosition: number = this.xPosition, yPosition: number = this.yPosition) { //todo unify

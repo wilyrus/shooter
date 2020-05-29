@@ -22,15 +22,13 @@
 </template>
 
 <script>
-import Shooter from './src/units/ShooterVue.vue';
-import { PowerupsFactory } from './src/factories/PowerupsFactory';
-import { PhysicsEngine } from './src/engines/PhysicsEngine';
-import { LevelsEngine } from './src/engines/LevelsEngine';
-
-// @ts-ignore
-import StartScreen from './src/screens/startScreen/index.vue';
-import PauseScreen from './src/screens/pauseScreen/index.vue';
-import HUD from './src/screens/hud/index.vue';
+import Shooter from './units/Shooter.vue';
+import { PowerupsFactory } from './factories/PowerupsFactory';
+import { PhysicsEngine } from './engines/PhysicsEngine';
+import { LevelsEngine } from './engines/LevelsEngine';
+import StartScreen from './screens/startScreen/index.vue';
+import PauseScreen from './screens/pauseScreen/index.vue';
+import HUD from './screens/hud/index.vue';
 import { mapState } from 'vuex';
 
 export default {
@@ -62,7 +60,7 @@ export default {
 
       new PowerupsFactory(this.PhysicsEngine);
 
-      this.$store.dispatch('addActor', { type: Shooter });
+      this.$store.commit('addActor', { type: Shooter });
 
       console.log( '%c%s', 'color: green; font: 1.2rem/1 Tahoma;', 'elements ready' );
       this.isGameInitialized = true;
@@ -106,11 +104,14 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
     html, body {
         padding: 0;
         margin: 0;
     }
+</style>
+
+<style scoped>
     #vueScene, .mainContainer {
         overflow: hidden;
         height: 100%;

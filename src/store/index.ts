@@ -1,8 +1,9 @@
 import { createStore } from 'vuex';
 import { uuidv4 } from '../utils';
+import { IUnite } from '../units/types';
 
 interface IShooter {
-    actors: Set<any>
+    actors: Set<IUnite>
 }
 
 const store = createStore({
@@ -14,14 +15,25 @@ const store = createStore({
     };
   },
 
-  actions: {
-    addActor({ state }, { type, config = {} }) {
+  mutations: {
+    addActor(state, { type, config = {} }) {
       const id = uuidv4();
       // @ts-ignore
       state.actors.add({ id, type, config: { ...config, id } });
     },
 
-    removeActor({ state }, actor) {
+    setInstance(state, { id, el }) {
+      // @ts-ignore
+      for (let a of state.actors) {
+        if (a.id === id) {
+          // @ts-ignore
+          a.el = el;
+          return;
+        }
+      }
+    },
+
+    removeActor(state, actor) {
       // @ts-ignore
       for (let a of state.actors) {
         if (a.id === actor.id) {
@@ -32,7 +44,7 @@ const store = createStore({
       }
     },
 
-    toggleActivity({ state }, isActive) {
+    toggleActivity(state, isActive) {
       // @ts-ignore
       for (let a of state.actors) {
         a.isActive = isActive;

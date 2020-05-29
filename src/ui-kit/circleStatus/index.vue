@@ -1,10 +1,10 @@
 <template>
-    <div>
+    <div class="circleContainer">
         <svg width="65" height="65" viewPort="0 0 45 45" version="1.1" xmlns="http://www.w3.org/2000/svg">
             <circle :r="radius" cx="35" cy="35" fill="transparent" stroke-dasharray="565.48" stroke-dashoffset="0"></circle>
             <circle class="bar" :r="radius" cx="35" cy="35" fill="transparent" stroke-dasharray="565.48" :stroke-dashoffset="strokeDashoffset"></circle>
         </svg>
-        <span>{{title}}</span>
+        <span class="text">{{title}}</span>
     </div>
 </template>
 
@@ -44,13 +44,19 @@ export default {
 </script>
 
 <style scoped>
+    .circleContainer {
+        text-align: center;
+    }
     circle {
         stroke-dashoffset: 0;
         transition: stroke-dashoffset 1s linear;
-        stroke: #666;
+        stroke: cornflowerblue;
         stroke-width: 0.5em;
     }
     .bar {
-        stroke: #FF9F1E;
+        stroke: cornflowerblue;
+    }
+    .text {
+        color: white;
     }
 </style>

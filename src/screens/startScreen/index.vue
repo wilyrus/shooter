@@ -1,17 +1,17 @@
 <template>
     <div class="container">
-        <Button v-if="!isGameInitialized" @click="$emit('startGame')">New Game</Button>
-        <Button v-else @click="$emit('startGame')">Respawn</Button>
-        <Button>Exit</Button>
+        <UIButton v-if="!isGameInitialized" @click="$emit('startGame')">New Game</UIButton>
+        <UIButton v-else @click="$emit('startGame')">Respawn</UIButton>
+        <UIButton>Exit</UIButton>
     </div>
 </template>
 
 <script>
-import Button from '../../ui-kit/button/index.vue';
+import UIButton from '../../ui-kit/button/index.vue';
 
 export default {
   components: {
-    Button
+    UIButton
   },
 
   props: {

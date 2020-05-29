@@ -1,6 +1,6 @@
 import {EventEmitter} from '../services/EventEmiter';
 import { store } from '../store';
-import Target from '../units/TargetVue.vue';
+import Target from '../units/Target.vue';
 // @ts-ignore
 import * as lvl1 from '../levels/lvl_1.json';
 
@@ -35,7 +35,7 @@ const LevelsEngine = class {
     }
 
     spawnActors(enemies: any) {
-      enemies.forEach(() => store.dispatch('addActor', { type: Target }));
+      enemies.forEach(() => store.commit('addActor', { type: Target }));
     }
 
     executeTrigger() {

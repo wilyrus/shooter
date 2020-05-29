@@ -1,23 +1,41 @@
 
-.projectile {
+.projectile[data-v-3e23245a] {
     height: 30px;
     width: 8px;
     position: absolute;
     will-change: transform;
 }
-.projectile.enemyProj {
+.projectile.enemyProj[data-v-3e23245a] {
     background: red;
     border-bottom-right-radius: 40%;
     border-bottom-left-radius: 40%;
 }
-.projectile.allyProj {
+.projectile.allyProj[data-v-3e23245a] {
     background: blue;
     border-top-right-radius: 40%;
     border-top-left-radius: 40%;
 }
 
 
-.shooter[data-v-45cd5fd2] {
+.projectile[data-v-5bff0a12] {
+    height: 30px;
+    width: 8px;
+    position: absolute;
+    will-change: transform;
+}
+.projectile.enemyProj[data-v-5bff0a12] {
+    background: red;
+    border-bottom-right-radius: 40%;
+    border-bottom-left-radius: 40%;
+}
+.projectile.allyProj[data-v-5bff0a12] {
+    background: blue;
+    border-top-right-radius: 40%;
+    border-top-left-radius: 40%;
+}
+
+
+.shooter[data-v-7a18393d] {
         height: 30px;
         width: 150px;
         position: absolute;
@@ -25,25 +43,42 @@
         will-change: transform;
       z-index: -1;
 }
-.shipBody[data-v-45cd5fd2] {
-        height: 100%;
-        width: 100%;
+.shipBody[data-v-7a18393d] {
+        height: 100px;
+        width: 40px;
+        position: absolute;
+      left: calc(50% - 20px);
         background: green;
         box-shadow: 0 2px 5px rgba(0,0,0,1);
         transition: transform 0.2s ease-in;
         z-index: 1;
 }
-.cannon[data-v-45cd5fd2] {
+.leftWing[data-v-7a18393d], .rightWing[data-v-7a18393d] {
+      position: absolute;
+      z-index: -1;
+      background-color: green;
+      width: 100px;
+      height: 30px;
+      top: 20px;
+}
+.leftWing[data-v-7a18393d] {
+      transform: rotate(-30deg);
+}
+.rightWing[data-v-7a18393d] {
+      transform: rotate(30deg);
+      left: 50px;
+}
+.cannon[data-v-7a18393d] {
         background-color: greenyellow;
         width: 20px;
         height: 60px;
         position: absolute;
         bottom: 0;
-        left: 65px;
+        left: calc(50% - 10px);
 }
 
 
-.powerUp {
+.powerUp[data-v-00826be0] {
         background-color: bisque;
         height: 50px;
         width: 50px;
@@ -53,9 +88,9 @@
         vertical-align: middle;
         text-align: center;
         line-height: 50px;
-        animation: powerUp 1s infinite;
+        animation: powerUp-data-v-00826be0 1s infinite;
 }
-@keyframes powerUp {
+@keyframes powerUp-data-v-00826be0 {
 0% { transform: scale(1);
 }
 50% { transform: scale(1.1);
@@ -65,24 +100,37 @@
 }
 
 
-.button[data-v-76818350] {
+.target[data-v-4461cc16] {
+      height: 30px;
+      width: 120px;
+      background: red;
+      position: absolute;
+      box-shadow: 0 2px 5px rgba(0,0,0,1);
+      will-change: transform;
+}
+
+
+.button[data-v-134c3fbf] {
         margin: 8px;
-        height: 40px;
+        height: 44px;
         font-size: 1.2rem;
-        background-color: white;
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
         border-radius: 3px;
         border: none;
         cursor: pointer;
         transition: box-shadow 0.1s;
+        color: white;
+        font-family: Areal;
+        background-color: cornflowerblue;
+        padding: 12px;
 }
-.button[data-v-76818350]:hover {
+.button[data-v-134c3fbf]:hover {
         box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
         transition: box-shadow 0.1s;
 }
 
 
-.container[data-v-79b8dbf0] {
+.container[data-v-18cff1e0] {
         position: fixed;
         background-color: rgba(0,0,0,0.5);
         width: 100%;
@@ -92,10 +140,11 @@
         align-items: center;
         flex-direction: column;
         z-index: 100;
+        backdrop-filter: blur(5px)
 }
 
 
-.container[data-v-2a120083] {
+.container[data-v-cd6c49c8] {
         position: fixed;
         background-color: rgba(0,0,0,0.5);
         width: 100%;
@@ -105,17 +154,24 @@
         align-items: center;
         flex-direction: column;
         z-index: 100;
+        backdrop-filter: blur(5px);
 }
 
 
-circle[data-v-2606759d] {
+.circleContainer[data-v-79504594] {
+        text-align: center;
+}
+circle[data-v-79504594] {
         stroke-dashoffset: 0;
         transition: stroke-dashoffset 1s linear;
-        stroke: #666;
+        stroke: cornflowerblue;
         stroke-width: 0.5em;
 }
-.bar[data-v-2606759d] {
-        stroke: #FF9F1E;
+.bar[data-v-79504594] {
+        stroke: cornflowerblue;
+}
+.text[data-v-79504594] {
+        color: white;
 }
 
 
@@ -134,15 +190,17 @@ circle[data-v-2606759d] {
 }
 
 
-html[data-v-251bd714], body[data-v-251bd714] {
+html, body {
         padding: 0;
         margin: 0;
 }
-#vueScene[data-v-251bd714], .mainContainer[data-v-251bd714] {
+
+
+#vueScene[data-v-e8566cb0], .mainContainer[data-v-e8566cb0] {
         overflow: hidden;
         height: 100%;
 }
-.menu[data-v-251bd714] {
+.menu[data-v-e8566cb0] {
         position: fixed;
         z-index: 100;
 }

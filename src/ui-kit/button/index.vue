@@ -4,14 +4,14 @@
 
 <script>
 export default {
-  name: 'button'
+  name: 'uiButton'
 };
 </script>
 
 <style scoped>
     .button {
         margin: 8px;
-        height: 40px;
+        height: 44px;
         font-size: 1.2rem;
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
         border-radius: 3px;
@@ -21,6 +21,7 @@ export default {
         color: white;
         font-family: Areal;
         background-color: cornflowerblue;
+        padding: 12px;
     }
 
     .button:hover {

@@ -1,6 +1,7 @@
-import { PowerUpTypes, ProjectileTypes, MotionConfig } from './types';
-import ProjectileVue from './ProjectileVue.vue';
+import { PowerUpTypes, ProjectileTypes, MotionConfig, IUnite } from './types';
+import ProjectileVue from './Projectile.vue';
 import { store } from '../store';
+import {ParticleEmitter} from '../services/ParticleEmitter';
 
 const Gun = class {
     type = 'single'
@@ -35,7 +36,7 @@ const Gun = class {
       }
     }
 
-    startShoot(shooter: any) { //todo fix
+    startShoot(shooter: IUnite) {
       this.autoShootInterval = setInterval(() =>
         this.shoot(this.projectileType, {
           moveSize: 5 + this.projectailSpeed,
@@ -48,12 +49,12 @@ const Gun = class {
       clearInterval(this.autoShootInterval);
     }
 
-    shoot(projectileType: ProjectileTypes, config: MotionConfig, shooter: any) { //todo fix
+    shoot(projectileType: ProjectileTypes, config: MotionConfig, shooter: IUnite) {
       //todo add spread to points
       for (let i = 0; i <= this.weaponType; i ++) {
         const point = shooter.getShootPoint();
 
-        store.dispatch('addActor', {
+        store.commit('addActor', {
           type: ProjectileVue,
           config: {
             x: point.x + 20,
@@ -61,6 +62,16 @@ const Gun = class {
             type: projectileType,
             ...config
           }
+        });
+        ParticleEmitter.generateParticlesFromObject({
+          x: point.x,
+          y: point.y
+        }, {
+          width: 20,
+          height: 20
+        },
+        {
+          backgroundColor: 'green'
         });
       }
     }

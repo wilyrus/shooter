@@ -23,14 +23,14 @@ const PhysicsEngine = class {
   public calculateCollisions(movedElement: any) {
     // @ts-ignore
     for (let actor of store.state.actors) {
-      if (actor.type === movedElement) {
+      if (actor.el === movedElement) {
         continue;
       }
-      const isIntersected = this.checkIntersection(movedElement, actor.type);
+      const isIntersected = this.checkIntersection(movedElement, actor.el);
 
       if (isIntersected) {
-        if (!this.handleIntersection(movedElement, actor)) {
-          this.handleIntersection(actor, movedElement);
+        if (!this.handleIntersection(movedElement, actor.el)) {
+          this.handleIntersection(actor.el, movedElement);
         }
       }
     }
@@ -60,11 +60,11 @@ const PhysicsEngine = class {
   }
 
   private removeActors(actorsToRemove: any[]) {
-    actorsToRemove.forEach(actor => store.dispatch('removeActor', actor));
+    actorsToRemove.forEach(actor => store.commit('removeActor', actor));
   }
 
   static toggleActivity(isActive: boolean): void {
-    store.dispatch('toggleActivity', isActive);
+    store.commit('toggleActivity', isActive);
   }
 };
 
