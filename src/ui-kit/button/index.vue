@@ -3,9 +3,9 @@
 </template>
 
 <script>
-    export default {
-        name: "button"
-    }
+export default {
+  name: 'button'
+};
 </script>
 
 <style scoped>
@@ -13,12 +13,14 @@
         margin: 8px;
         height: 40px;
         font-size: 1.2rem;
-        background-color: white;
         box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
         border-radius: 3px;
         border: none;
         cursor: pointer;
         transition: box-shadow 0.1s;
+        color: white;
+        font-family: Areal;
+        background-color: cornflowerblue;
     }
 
     .button:hover {

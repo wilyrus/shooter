@@ -35,11 +35,12 @@ export default {
         background-color: rgba(0,0,0,0.5);
         left: 0;
         bottom: 0;
-        height: 80px;
-        width: 220px;
+        height: 100px;
+        width: 150px;
         display: flex;
         justify-content: space-around;
         align-items: center;
         z-index: 100;
+        border-top-right-radius: 25px;
     }
 </style>

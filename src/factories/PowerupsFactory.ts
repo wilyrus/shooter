@@ -1,16 +1,20 @@
-import { PowerUp } from '../units/PowerUp';
+import PowerUpVue from '../units/PowerUpVue.vue';
+import { store } from '../store';
 
 const PowerupsFactory = class {
     intervalId: NodeJS.Timeout;
+    physicsEngine: any;
 
-    constructor() {
+    constructor(physictEngine: any) {
+      this.physicsEngine = physictEngine;
       this.startSpawning();
     }
 
     startSpawning() {
       this.intervalId = setInterval(() => {
         const xPos = window.innerWidth * Math.random();
-        window.facade.physicsEngine.actors.push(new PowerUp(xPos));
+
+        store.dispatch('addActor', { type: PowerUpVue, config: { xPos } });
       }, 2000);
     }
 };

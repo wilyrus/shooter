@@ -1,5 +1,6 @@
-import { WeaponsFactory } from '../factories/WeaponsFactory';
 import { PowerUpTypes, ProjectileTypes, MotionConfig } from './types';
+import ProjectileVue from './ProjectileVue.vue';
+import { store } from '../store';
 
 const Gun = class {
     type = 'single'
@@ -9,11 +10,6 @@ const Gun = class {
     projectileType: ProjectileTypes
     autoShootInterval: NodeJS.Timeout
     weaponType = 0;
-    weaponTypeMap = {
-      0: WeaponsFactory.shootSingle,
-      1: WeaponsFactory.shootDouble,
-      2: WeaponsFactory.shootSpread
-    }
 
     constructor(projectileType: ProjectileTypes, weaponType: number = 0) {
       this.projectileType = projectileType;
@@ -53,8 +49,20 @@ const Gun = class {
     }
 
     shoot(projectileType: ProjectileTypes, config: MotionConfig, shooter: any) { //todo fix
-      // @ts-ignore
-      this.weaponTypeMap[this.weaponType](shooter.getShootPoint(), projectileType, config);
+      //todo add spread to points
+      for (let i = 0; i <= this.weaponType; i ++) {
+        const point = shooter.getShootPoint();
+
+        store.dispatch('addActor', {
+          type: ProjectileVue,
+          config: {
+            x: point.x + 20,
+            y: point.y,
+            type: projectileType,
+            ...config
+          }
+        });
+      }
     }
 
     destroy() {

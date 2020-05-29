@@ -1,11 +1,19 @@
 <template>
     <div class="container">
-        <div>Game have been paused</div>
+        <Button v-if="!isGameInitialized" @click="$emit('startGame')">New Game</Button>
+        <Button v-else @click="$emit('startGame')">Respawn</Button>
+        <Button>Exit</Button>
     </div>
 </template>
 
 <script>
+import Button from '../../ui-kit/button/index.vue';
+
 export default {
+  components: {
+    Button
+  },
+
   props: {
     isGameInitialized: {
       type: Boolean,
@@ -26,5 +34,6 @@ export default {
         align-items: center;
         flex-direction: column;
         z-index: 100;
+        backdrop-filter: blur(5px)
     }
 </style>
