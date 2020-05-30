@@ -18,12 +18,8 @@ interface Style {
 //interface Path<Position>
 
 const ParticleEmitter = class {
-  constructor() {
-
-  }
-
-  static emiteParticle(path: [Position], particle: Style, time: number = 3) {
-    store.commit('addActor', { type: Particle, config: particle, animation: {
+  static emitParticle(path: [Position], particle: Style  = {}, time: number = 3) {
+    store.commit('addActor', { type: Particle, config: { ...particle, animation: {
       animation: [
         { transform: 'rotate(0) translate3D(-50%, -50%, 0)', color: '#000' },
         { color: '#431236', offset: 0.333},
@@ -31,7 +27,7 @@ const ParticleEmitter = class {
       ],
       time: time * 1000,
       callback: this.disposeParticle
-    }});
+    }}});
   }
 
   static generateParticlesFromObject(position: Position, size: Size, style: Style, time: number = 3) {

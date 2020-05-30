@@ -34,23 +34,26 @@ export default {
   },
 
   mounted() {
-    this.startMoving();
+    this.move();
   },
 
   methods: {
-    startMoving() {
-      this.actionsIntervals.push( setInterval(() => {
+    move() {
+      this.moveTimeout = setTimeout(() => {
         if (this.isActive) {
           if (this.checkOutOfBoundsExceed()) {
             this.dispose();
           } else {
-            this.yPosition = this.yPosition + this.moveSize;
-            this.$el.style.transform = `translate(${this.xPosition}px, ${this.yPosition}px)`;
+            requestAnimationFrame(() => {
+              this.yPosition = this.yPosition + this.moveSize;
+              this.$el.style.transform = `translate(${this.xPosition}px, ${this.yPosition}px)`;
 
-            this.$emit('move', this);
+              this.$emit('move', this);
+              this.move();
+            });
           }
         }
-      }, 10));
+      }, 10);
     },
 
     getRandomType() {
@@ -106,7 +109,7 @@ export default {
         vertical-align: middle;
         text-align: center;
         line-height: 50px;
-        animation: powerUp 1s infinite;
+        /*animation: powerUp 1s infinite;*/
     }
 
     @keyframes powerUp {

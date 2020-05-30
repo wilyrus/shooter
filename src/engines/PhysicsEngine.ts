@@ -1,4 +1,4 @@
-import { UniteTypes, ProjectileTypes } from '../units/types';
+import { UniteTypes, ProjectileTypes, IUnite } from '../units/types';
 import { store } from '../store';
 
 const PhysicsEngine = class {
@@ -12,15 +12,15 @@ const PhysicsEngine = class {
     const el1Bottom = el1.yPosition + el1.height;
     const el2Bottom = el2.yPosition + el2.height;
 
-    const isYIntercest = el1Bottom <= el2.yPosition && el1.yPosition >= el2Bottom
+    const isYIntersect = el1Bottom <= el2.yPosition && el1.yPosition >= el2Bottom
             || el1Bottom >= el2.yPosition && el1.yPosition <= el2Bottom;
-    const isXIntercest = targetLeft >= el2.xPosition + el2.width && targetLeft + targetWidth <= el2.xPosition
+    const isXIntersect = targetLeft >= el2.xPosition + el2.width && targetLeft + targetWidth <= el2.xPosition
             || targetLeft <= el2.xPosition + el2.width && targetLeft + targetWidth >= el2.xPosition;
 
-    return isYIntercest && isXIntercest;
+    return isYIntersect && isXIntersect;
   }
 
-  public calculateCollisions(movedElement: any) {
+  public calculateCollisions(movedElement: IUnite) {
     // @ts-ignore
     for (let actor of store.state.actors) {
       if (actor.el === movedElement) {

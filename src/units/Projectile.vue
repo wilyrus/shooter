@@ -57,23 +57,24 @@ export default {
       this.className = 'allyProj';
     }
 
-    this.startMoving();
+    this.move();
   },
 
   methods: {
-    startMoving() {
-      const intervalId = setInterval(() => {
+    move() {
+      this.moveTimeout = setTimeout(() => {
         if (this.isActive) {
           if (this.checkOutOfBoundsExceed()) {
             this.dispose();
           } else {
-            this.yPosition = this.yPosition + this.moveSize * this.direction * -1;
-            this.updatePosition(this.xPosition, this.yPosition);
+            requestAnimationFrame(() => {
+              this.yPosition = this.yPosition + this.moveSize * this.direction * -1;
+              this.updatePosition(this.xPosition, this.yPosition);
+              this.move();
+            });
           }
         }
       }, this.moveDelay);
-
-      this.actionsIntervals.push(intervalId);
     }
   }
 };

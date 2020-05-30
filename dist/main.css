@@ -1,41 +1,41 @@
 
-.projectile[data-v-3e23245a] {
+.projectile[data-v-612897eb] {
     height: 30px;
     width: 8px;
     position: absolute;
     will-change: transform;
 }
-.projectile.enemyProj[data-v-3e23245a] {
+.projectile.enemyProj[data-v-612897eb] {
     background: red;
     border-bottom-right-radius: 40%;
     border-bottom-left-radius: 40%;
 }
-.projectile.allyProj[data-v-3e23245a] {
+.projectile.allyProj[data-v-612897eb] {
     background: blue;
     border-top-right-radius: 40%;
     border-top-left-radius: 40%;
 }
 
 
-.projectile[data-v-5bff0a12] {
+.projectile[data-v-5b096bfe] {
     height: 30px;
     width: 8px;
     position: absolute;
     will-change: transform;
 }
-.projectile.enemyProj[data-v-5bff0a12] {
+.projectile.enemyProj[data-v-5b096bfe] {
     background: red;
     border-bottom-right-radius: 40%;
     border-bottom-left-radius: 40%;
 }
-.projectile.allyProj[data-v-5bff0a12] {
+.projectile.allyProj[data-v-5b096bfe] {
     background: blue;
     border-top-right-radius: 40%;
     border-top-left-radius: 40%;
 }
 
 
-.shooter[data-v-7a18393d] {
+.shooter[data-v-e69ce008] {
         height: 30px;
         width: 150px;
         position: absolute;
@@ -43,32 +43,39 @@
         will-change: transform;
       z-index: -1;
 }
-.shipBody[data-v-7a18393d] {
+.hull[data-v-e69ce008] {
+      transition: transform 0.2s ease-in;
+}
+.shipBody[data-v-e69ce008] {
         height: 100px;
         width: 40px;
         position: absolute;
       left: calc(50% - 20px);
         background: green;
         box-shadow: 0 2px 5px rgba(0,0,0,1);
-        transition: transform 0.2s ease-in;
         z-index: 1;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
 }
-.leftWing[data-v-7a18393d], .rightWing[data-v-7a18393d] {
+.leftWing[data-v-e69ce008], .rightWing[data-v-e69ce008] {
       position: absolute;
       z-index: -1;
       background-color: green;
-      width: 100px;
-      height: 30px;
-      top: 20px;
+      width: 115px;
+      height: 40px;
+      top: 30px;
 }
-.leftWing[data-v-7a18393d] {
-      transform: rotate(-30deg);
+.leftWing[data-v-e69ce008] {
+      transform: rotate(-40deg);
+      border-top-left-radius: 50px;
+      right: 50px;
 }
-.rightWing[data-v-7a18393d] {
-      transform: rotate(30deg);
+.rightWing[data-v-e69ce008] {
+      transform: rotate(40deg);
+      border-top-right-radius: 50px;
       left: 50px;
 }
-.cannon[data-v-7a18393d] {
+.cannon[data-v-e69ce008] {
         background-color: greenyellow;
         width: 20px;
         height: 60px;
@@ -78,7 +85,7 @@
 }
 
 
-.powerUp[data-v-00826be0] {
+.powerUp[data-v-03bd5946] {
         background-color: bisque;
         height: 50px;
         width: 50px;
@@ -88,9 +95,9 @@
         vertical-align: middle;
         text-align: center;
         line-height: 50px;
-        animation: powerUp-data-v-00826be0 1s infinite;
+        /*animation: powerUp 1s infinite;*/
 }
-@keyframes powerUp-data-v-00826be0 {
+@keyframes powerUp-data-v-03bd5946 {
 0% { transform: scale(1);
 }
 50% { transform: scale(1.1);
@@ -100,7 +107,7 @@
 }
 
 
-.target[data-v-4461cc16] {
+.target[data-v-35879970] {
       height: 30px;
       width: 120px;
       background: red;
@@ -196,11 +203,11 @@ html, body {
 }
 
 
-#vueScene[data-v-e8566cb0], .mainContainer[data-v-e8566cb0] {
+#vueScene[data-v-164daf43], .mainContainer[data-v-164daf43] {
         overflow: hidden;
         height: 100%;
 }
-.menu[data-v-e8566cb0] {
+.menu[data-v-164daf43] {
         position: fixed;
         z-index: 100;
 }

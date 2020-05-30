@@ -1,9 +1,11 @@
 <template>
 <div class="shooter">
   <div class="cannon"></div>
-  <div ref="shipBody" class="shipBody"></div>
-  <div ref="leftWing" class="leftWing"></div>
-  <div ref="rightWing" class="rightWing"></div>
+  <div ref="shipBody" class="hull">
+    <div class="shipBody"></div>
+    <div class="leftWing"></div>
+    <div class="rightWing"></div>
+  </div>
 </div>
 </template>
 
@@ -96,6 +98,10 @@ export default {
       z-index: -1;
     }
 
+    .hull {
+      transition: transform 0.2s ease-in;
+    }
+
     .shipBody {
         height: 100px;
         width: 40px;
@@ -103,24 +109,28 @@ export default {
       left: calc(50% - 20px);
         background: green;
         box-shadow: 0 2px 5px rgba(0,0,0,1);
-        transition: transform 0.2s ease-in;
         z-index: 1;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
     }
     .leftWing, .rightWing {
       position: absolute;
       z-index: -1;
       background-color: green;
-      width: 100px;
-      height: 30px;
-      top: 20px;
+      width: 115px;
+      height: 40px;
+      top: 30px;
     }
 
     .leftWing {
-      transform: rotate(-30deg);
+      transform: rotate(-40deg);
+      border-top-left-radius: 50px;
+      right: 50px;
     }
 
     .rightWing {
-      transform: rotate(30deg);
+      transform: rotate(40deg);
+      border-top-right-radius: 50px;
       left: 50px;
     }
 

@@ -15,47 +15,27 @@ export default {
       height: 30,
       width: 8,
       className: 'allyProj',
-      xPosition: this.x,
-      yPosition: this.y,
       active: true
     };
   },
 
   props: {
-    x: {
-      type: Number,
-      default: 0
-    },
-    y: {
-      type: Number,
-      default: 0
-    },
-    type: {
-      type: Number,
-      default: 0
-    },
-    moveSize: {
-      type: Number,
-      default: 2
-    },
     animation: {
-      type: () => {}
+      type: Object
     },
     id: {
       type: String
     }
   },
 
-  mixins: [uniteBaseMixin],
-
   mounted() {
-    this.startMoving();
+    this.startAnimation();
   },
 
   methods: {
-    startMoving() {
-      this.yPosition = this.yPosition + this.moveSize * this.direction * -1;
-      this.updatePosition(this.xPosition, this.yPosition);
+    startAnimation() {
+      const ani = this.$el.animate(this.animation.animation, this.animation.time);
+      ani.onfinish = this.animation.callback;
     }
   }
 };

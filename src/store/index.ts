@@ -1,6 +1,7 @@
 import { createStore } from 'vuex';
 import { uuidv4 } from '../utils';
 import { IUnite } from '../units/types';
+import { markRaw } from 'vue';
 
 interface IShooter {
     actors: Set<IUnite>
@@ -19,7 +20,7 @@ const store = createStore({
     addActor(state, { type, config = {} }) {
       const id = uuidv4();
       // @ts-ignore
-      state.actors.add({ id, type, config: { ...config, id } });
+      state.actors.add(markRaw({ id, type, config: { ...config, id } }));
     },
 
     setInstance(state, { id, el }) {

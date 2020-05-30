@@ -34,6 +34,7 @@ const uniteBaseMixin: any = {
         backgroundColor: 'green'
       });
       this.actionsIntervals.forEach((int: NodeJS.Timeout) => clearInterval(int));
+      clearTimeout(this.moveTimeout);
       if (this.gun) {
         this.gun.destroy();
       }
@@ -41,7 +42,7 @@ const uniteBaseMixin: any = {
       store.commit('removeActor', this);
     },
 
-    checkOutOfBoundsExceed(xPosition: number = this.xPosition, yPosition: number = this.yPosition) { //todo unify
+    checkOutOfBoundsExceed(xPosition: number = this.xPosition, yPosition: number = this.yPosition) {
       const isYPositionExceed = yPosition + this.height <= 0 || yPosition > window.innerHeight;
       const isXPositionExceed = xPosition + this.width >= window.innerWidth || xPosition <= 0;
 

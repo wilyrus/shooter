@@ -33,6 +33,7 @@ export default {
     this.gun = new Gun(this.type);
 
     this.startMoving();
+    this.move();
     this.gun.startShoot(this);
   },
 
@@ -44,18 +45,23 @@ export default {
         }
       }, 800);
 
-      const shootInterval = setInterval(() => {
+      this.actionsIntervals.push(moveInterval);
+    },
+
+    move() {
+      this.moveTimeout = setTimeout(() => {
         if (this.isActive) {
           if (this.checkOutOfBoundsExceed(this.xPosition + this.moveSize * this.direction, this.yPosition)) {
             this.direction *= -1;
           } else {
-            this.xPosition = this.xPosition + this.moveSize * this.direction;
-            this.updatePosition(this.xPosition, this.yPosition);
+            requestAnimationFrame(() => {
+              this.xPosition = this.xPosition + this.moveSize * this.direction;
+              this.updatePosition(this.xPosition, this.yPosition);
+              this.move();
+            });
           }
         }
       }, 1);
-
-      this.actionsIntervals.push(moveInterval, shootInterval);
     }
   }
 };
