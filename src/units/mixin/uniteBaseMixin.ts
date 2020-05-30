@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { ParticleEmitter } from '../../services/ParticleEmitter';
 import {store} from '../../store';
 

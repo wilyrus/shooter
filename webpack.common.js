@@ -16,29 +16,29 @@ module.exports = {
   devtool: 'source-map',
 
   resolve: {
-    extensions: ['.ts', '.js', '.json', '.vue', '.jsx', '.tsx', '.css']
+    extensions: ['.ts', '.js', '.vue', '.json'],
+    alias: {
+      'vue': '@vue/runtime-dom'
+    }
   },
 
   module: {
     rules: [
       {
-        test: /\.ts(x?)$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'ts-loader'
-          }
-        ]
+        test: /\.vue$/,
+        use: 'vue-loader'
+      },
+      {
+        test: /\.ts$/,
+        loader: 'ts-loader',
+        options: {
+          appendTsSuffixTo: [/\.vue$/],
+        }
       },
       {
         enforce: 'pre',
         test: /\.js$/,
         loader: 'source-map-loader'
-      },
-
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader'
       },
       {
         test: /\.css$/,
